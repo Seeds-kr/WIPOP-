@@ -1,0 +1,20 @@
+#spring.application.name=Movie
+# database ?? ??
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    #    ?? PC? ????? Database??? ?? ???.
+    url: jdbc:mysql://localhost:3306/movie_db?serverTimezone=UTC
+    #    mysql? ??? ??? ?? ??? ?? ???.
+    username: root
+    password: 1234
+  thymeleaf:
+    cache: false
+
+  # spring data jpa ??
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    open-in-view: false
+    show-sql: true
+    hibernate:
+      ddl-auto: update
