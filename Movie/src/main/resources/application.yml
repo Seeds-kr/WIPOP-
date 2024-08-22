@@ -3,9 +3,7 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    #    ?? PC? ????? Database??? ?? ???.
     url: jdbc:mysql://127.0.0.1:3306/movie_db?serverTimezone=UTC
-    #    mysql? ??? ??? ?? ??? ?? ???.
     username: root
     password: 1234
   thymeleaf:
@@ -15,13 +13,13 @@ spring:
   jpa:
     database-platform: org.hibernate.dialect.MySQL8Dialect
     open-in-view: false
-    show-sql: true
+    show-sql: false
     hibernate:
-      ddl-auto: create
+      ddl-auto: none
     properties:
       hibernate:
         #        show_sql: true
-        format_sql: true
+        format_sql: false
         use_sql_comments: true # querydsl에서 jpql 보고 싶다면
         dialect: org.hibernate.dialect.MySQL8Dialect
 

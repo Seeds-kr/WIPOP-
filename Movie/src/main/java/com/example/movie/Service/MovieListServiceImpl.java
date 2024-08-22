@@ -56,8 +56,6 @@ public class MovieListServiceImpl implements MovieListService{
     public MovieInfoDTO getMovie(Long id) {
 
         List<Object[]> result = movieInfoRepository.getMovieWithAll(id);
-        System.out.println(result.get(0)[3]);
-
         String movieName = (String) result.get(0)[1];
         String movieNameK = (String) result.get(0)[2];
         String genres = (String) result.get(0)[3];
