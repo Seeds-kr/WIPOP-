@@ -1,0 +1,60 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<th:block>
+
+    <th:block th:fragment="content">
+
+        <form action="/movie/list" method="get" id="searchForm">
+            <input type="hidden" name="page" value="1">
+        </form>
+
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Picture</th>
+                <th scope="col">Movie Name</th>
+                <th scope="col">Rating</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <tr th:each="dto : ${result.dtoList}" >
+                <th scope="row">
+                    <a th:href="@{/movie/read(id = ${dto.id}, page= ${result.page})}">
+                        [[${dto.id}]]
+                    </a>
+                </th>
+                <td><img th:if="${dto.getPosterURL() != null }"
+                         th:src="|https://image.tmdb.org/t/p/w300${dto.getPosterURL()}|" >[[${dto.movieNameK}]]</td>
+                <td>[[${dto.movieName}]]</td>
+                <td><b>[[${dto.rating}]]</b></td>
+            </tr>
+
+            </tbody>
+        </table>
+
+        <ul class="pagination h-100 justify-content-center align-items-center">
+
+            <li class="page-item " th:if="${result.prev}">
+                <a class="page-link" th:href="@{/movie/list(page= ${result.start -1})}" tabindex="-1">Previous</a>
+            </li>
+
+            <li th:class=" 'page-item ' + ${result.page == page?'active':''} " th:each="page: ${result.pageList}">
+                <a class="page-link" th:href="@{/movie/list(page = ${page})}">
+                    [[${page}]]
+                </a>
+            </li>
+
+            <li class="page-item" th:if="${result.next}">
+                <a class="page-link" th:href="@{/movie/list(page= ${result.end + 1} )}">Next</a>
+            </li>
+        </ul>
+
+
+        <script th:inline="javascript">
+
+        </script>
+    </th:block>
+
+</th:block>

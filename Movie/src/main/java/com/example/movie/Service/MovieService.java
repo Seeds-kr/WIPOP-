@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 @Service //스프링이 관리해주는 객체 == 스프링 빈
 @RequiredArgsConstructor //controller와 같이. final 멤버변수 생성자 만드는 역할
+//현재 사용 안함
 public class MovieService {
 
     private final MovieRepository movieRepository; // 먼저 jpa, mysql dependency 추가
