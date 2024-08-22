@@ -15,8 +15,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.stream.Collectors;
 
 @Slf4j
 @RestController
@@ -24,6 +22,7 @@ import java.util.stream.Collectors;
 @RequestMapping("/dummy")
 
 //영화 목록 받아오는 컨트롤러
+//현재 사용 안함
  public class dummyController {
 
 
@@ -68,9 +67,9 @@ import java.util.stream.Collectors;
                     .id(movieId)
                     .movieName(movieName)
                     .rating(rating)
-                    .genres(Arrays.stream(genre)
-                            .map(genreService::findOrCreateNew)
-                            .collect(Collectors.toSet()))
+                    //.genres(Arrays.stream(genre)
+                            //.map(genreService::findOrCreateNew)
+                            //.collect(Collectors.toSet()))
                     .build());
         }
         return ResponseEntity.ok().build();

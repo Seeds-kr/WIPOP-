@@ -4,8 +4,6 @@ import com.example.movie.dto.MovieDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.Set;
-
 @Entity
 @Setter
 @Getter
@@ -14,6 +12,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "movie_table") //database에 해당 이름의 테이블 생성
+//현재 사용 안함
 public class MovieEntity { //table 역할
     //jpa ==> database를 객체처럼 사용 가능
 
@@ -27,8 +26,8 @@ public class MovieEntity { //table 역할
     @Column
     private double rating;
 
-    @ManyToMany
-    private Set<GenresEntity> genres;
+    //@ManyToMany
+    //private Set<GenresEntity> genres;
 
     public MovieEntity toMovieData() {
         return MovieEntity.builder().id(this.id).movieName(this.movieName).rating(this.rating).build();

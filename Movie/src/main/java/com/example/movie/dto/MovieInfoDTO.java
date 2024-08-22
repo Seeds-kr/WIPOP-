@@ -1,15 +1,15 @@
 package com.example.movie.dto;
 
 import com.example.movie.Entity.MovieInfoEntity;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @ToString
+@Builder
+@AllArgsConstructor
+
 public class MovieInfoDTO {
     private Long id;
     private String movieName;
@@ -17,6 +17,7 @@ public class MovieInfoDTO {
     private String posterURL;
     private String releaseDate;
     private String movieInfo;
+    private String genres;
     private double rating;
 
 
@@ -25,7 +26,7 @@ public class MovieInfoDTO {
         movieInfoDTO.setId(movieinfoEntity.getId());
         movieInfoDTO.setMovieName(movieinfoEntity.getMovieName());
         movieInfoDTO.setRating(movieinfoEntity.getRating());
-
+        movieInfoDTO.setGenres(movieinfoEntity.getGenres());
         return movieInfoDTO;
     }
 }
