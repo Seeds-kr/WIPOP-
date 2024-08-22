@@ -3,6 +3,7 @@ package com.example.movie.Entity;
 import com.example.movie.dto.MovieInfoDTO;
 import jakarta.persistence.*;
 import lombok.*;
+
 @Entity
 @Setter
 @Getter
@@ -28,6 +29,8 @@ public class MovieInfoEntity {
     private String movieInfo;
     @Column
     private double rating;
+    @Column
+    private String genres;
 
     public static MovieInfoEntity toMovieInfoEntity(MovieInfoDTO movieinfoDTO){
         MovieInfoEntity movieInfoEntity = new MovieInfoEntity();
@@ -38,6 +41,7 @@ public class MovieInfoEntity {
         movieInfoEntity.setReleaseDate(movieinfoDTO.getReleaseDate());
         movieInfoEntity.setMovieInfo(movieinfoDTO.getMovieInfo());
         movieInfoEntity.setRating(movieinfoDTO.getRating());
+        movieInfoEntity.setGenres(movieinfoDTO.getGenres());
         return movieInfoEntity;
     }
 }

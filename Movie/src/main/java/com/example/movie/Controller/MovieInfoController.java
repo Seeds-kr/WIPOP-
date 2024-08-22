@@ -31,7 +31,7 @@ public class MovieInfoController {
 
     private final MovieInfoRepo movieInfoRepo;
 
-    //movieName으로 영호 상세 정보를 받아옵니다.
+    //movieName으로 영화 상세 정보를 받아옵니다.
     @GetMapping("/movieinfo")
     public String searchAPI(String movieName) {
 
@@ -69,7 +69,6 @@ public class MovieInfoController {
                 mnList.put("영화 평점" + i, obj.getOrDefault("vote_average","null"));
                 mnList.put("영화 소개" + i, obj.getOrDefault("overview","null"));
                 mnList.put("영화 포스터" + i, obj.get("poster_path"));
-                System.out.println(mnList.get("영화 포스터" + i));
 
                 //DB에 정보 전달하는 부분
                 MovieInfoDTO movieInfoDTO = new MovieInfoDTO();
@@ -101,6 +100,79 @@ public class MovieInfoController {
             result.put("statusCode", "999");
             result.put("body", "excpetion오류");
             System.out.println(e.toString());
+        }
+        return jsonInString;
+    }
+
+    //TMDB에서 영화 리스트 받아오기
+    @GetMapping("/getmovielist")
+    public String getAPI() {
+
+        HashMap<String, Object> result = new HashMap<String, Object>();
+        String jsonInString = "";
+        int pageMax = 10;//받아오는 마지막 페이지
+        int pageNum = 1;//받아오는 시작 페이지
+        for (pageNum = 1; pageNum <= pageMax; pageNum++){
+            try {
+                RestTemplate restTemplate = new RestTemplate();
+                HttpHeaders header = new HttpHeaders();
+                HttpEntity<?> entity = new HttpEntity<>(header);
+                //API url, key 입력하는 부분
+                String url = "https://api.themoviedb.org/3/discover/movie";
+                UriComponents uri = UriComponentsBuilder.fromHttpUrl(url + "?" + "api_key=92d0cc516f465cac76ef0765774d79f7" + "&language=ko-KR&page=" + pageNum).build();
+
+                //이 한줄의 코드로 API를 호출해 MAP타입으로 전달 받는다.
+                ResponseEntity<Map> resultMap = restTemplate.exchange(uri.toString(), HttpMethod.GET, entity, Map.class);
+                result.put("statusCode", resultMap.getStatusCodeValue()); //http status code를 확인
+                result.put("header", resultMap.getHeaders()); //헤더 정보 확인
+                result.put("body", resultMap.getBody()); //실제 데이터 정보 확인
+                //전체 정보 받아오는 부분
+                //LinkedHashMap lm = (LinkedHashMap) resultMap.getBody().get("boxOfficeResult");
+                ArrayList<Map> dboxoffList = (ArrayList<Map>) resultMap.getBody().getOrDefault("results", 0);
+
+                LinkedHashMap mnList = new LinkedHashMap<>();
+                int i = 0;
+                //필요한 정보만 받아오는 부분
+                for (Map obj : dboxoffList) {
+                    mnList.put("객체 번호" + i, obj.getOrDefault("id", "null"));
+                    mnList.put("영화 이름" + i, obj.getOrDefault("title", "null"));
+                    mnList.put("영화 원제" + i, obj.getOrDefault("original_title", "null"));
+                    mnList.put("영화 출시일" + i, obj.getOrDefault("release_date", "null"));
+                    mnList.put("영화 평점" + i, obj.getOrDefault("vote_average", "null"));
+                    mnList.put("영화 소개" + i, obj.getOrDefault("overview", "null"));
+                    mnList.put("영화 포스터" + i, obj.get("poster_path"));
+                    mnList.put("영화 장르" + i, obj.getOrDefault("genre_ids", "null"));
+
+                    //DB에 정보 전달하는 부분
+                    MovieInfoDTO movieInfoDTO = new MovieInfoDTO();
+                    movieInfoDTO.setMovieNameK(mnList.getOrDefault("영화 이름" + i, "null").toString());
+                    movieInfoDTO.setMovieName(mnList.getOrDefault("영화 원제" + i, "null").toString());
+                    movieInfoDTO.setReleaseDate(mnList.getOrDefault("영화 출시일" + i, "null").toString());
+                    movieInfoDTO.setRating(Double.parseDouble(mnList.getOrDefault("영화 평점" + i, "null").toString()));
+                    movieInfoDTO.setMovieInfo(mnList.getOrDefault("영화 소개" + i, "null").toString());
+                    movieInfoDTO.setGenres(mnList.getOrDefault("영화 장르" + i, "null").toString());
+                    //TMDB에서 포스터 경로가 없으면 null로 저장해서 예외 처리
+                    if (mnList.get("영화 포스터" + i) == null) {
+                        movieInfoDTO.setPosterURL("");
+                    } else {
+                        movieInfoDTO.setPosterURL(mnList.getOrDefault("영화 포스터" + i, "null").toString());
+                    }
+                    movieInfoRepo.save(MovieInfoEntity.toMovieInfoEntity(movieInfoDTO));
+                    i++;
+                }
+                ObjectMapper mapper = new ObjectMapper();
+                jsonInString = mapper.writeValueAsString(mnList);
+
+            } catch (HttpClientErrorException | HttpServerErrorException e) {
+                result.put("statusCode", e.getRawStatusCode());
+                result.put("body", e.getStatusText());
+                System.out.println(e.toString());
+
+            } catch (Exception e) {
+                result.put("statusCode", "999");
+                result.put("body", "excpetion오류");
+                System.out.println(e.toString());
+            }
         }
         return jsonInString;
     }

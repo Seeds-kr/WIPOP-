@@ -1,16 +1,16 @@
 package com.example.movie.dto;
 
 import com.example.movie.Entity.MovieEntity;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 //lombok dependency추가
 @Getter
 @Setter
 @NoArgsConstructor
 @ToString
+@Builder
+@AllArgsConstructor
+//현재 사용 안함
 public class MovieDTO { //회원 정보를 필드로 정의
     private Long id;
     private String movieName;
@@ -26,4 +26,6 @@ public class MovieDTO { //회원 정보를 필드로 정의
 
         return movieDTO;
     }
+
+
 }
