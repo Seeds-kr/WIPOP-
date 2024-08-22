@@ -7,7 +7,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
-
+//임시로 주석처리함
    /* @Override
     public void addInterceptors(InterceptorRegistry registry) {
 
