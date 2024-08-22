@@ -1,13 +1,11 @@
 package com.example.movie.Service;
 
 import com.example.movie.Entity.Member;
-import com.example.movie.Entity.MovieEntity;
 import com.example.movie.Entity.MovieInfoEntity;
 import com.example.movie.Entity.Review;
 import com.example.movie.dto.ReviewDto;
 import com.example.movie.repository.MemberRepository;
 import com.example.movie.repository.MovieInfoRepo;
-import com.example.movie.repository.MovieRepository;
 import com.example.movie.repository.ReviewRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
