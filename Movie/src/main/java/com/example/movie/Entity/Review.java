@@ -26,9 +26,9 @@ public class Review extends BaseTime{
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "movieentity_id")
-    private MovieEntity movie;
+    private MovieInfoEntity movie;
 
-    public Review(String body, Member member, MovieEntity movie, Long score) {
+    public Review(String body, Member member, MovieInfoEntity movie, Long score) {
         this.body = body;
         this.member = member;
         this.movie = movie;

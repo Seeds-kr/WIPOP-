@@ -4,6 +4,9 @@ import com.example.movie.dto.MovieInfoDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Setter
 @Getter
@@ -32,6 +35,13 @@ public class MovieInfoEntity {
     @Column
     private String genres;
 
+    @ManyToOne
+    @JoinColumn(name = "member_id")
+    private Member member;
+
+    @OneToMany(mappedBy = "movie")
+    private List<Review> reviews = new ArrayList<>();
+
     public static MovieInfoEntity toMovieInfoEntity(MovieInfoDTO movieinfoDTO){
         MovieInfoEntity movieInfoEntity = new MovieInfoEntity();
         movieInfoEntity.setId(movieinfoDTO.getId());
@@ -43,5 +53,10 @@ public class MovieInfoEntity {
         movieInfoEntity.setRating(movieinfoDTO.getRating());
         movieInfoEntity.setGenres(movieinfoDTO.getGenres());
         return movieInfoEntity;
+    }
+
+    public void addReview(Review review){
+        reviews.add(review);
+        review.setMovie(this);
     }
 }

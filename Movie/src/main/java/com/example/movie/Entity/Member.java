@@ -26,7 +26,7 @@ public class Member extends BaseTime{
     private List<Review> reviews = new ArrayList<>();
 
     @OneToMany(mappedBy = "member")
-    private List<MovieEntity> movies = new ArrayList<>();
+    private List<MovieInfoEntity> movies = new ArrayList<>();
 
     public void addReview(Review review){
         reviews.add(review);

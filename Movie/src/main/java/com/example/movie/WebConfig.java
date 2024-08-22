@@ -8,7 +8,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
 
-    @Override
+   /* @Override
     public void addInterceptors(InterceptorRegistry registry) {
 
         registry.addInterceptor(new LoginInterceptor())
@@ -17,4 +17,5 @@ public class WebConfig implements WebMvcConfigurer {
                 .excludePathPatterns("/", "회원가입", "/login", "/logout",
                         "/css/**");
     }
+    */
 }
