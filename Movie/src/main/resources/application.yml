@@ -4,7 +4,7 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     #    ?? PC? ????? Database??? ?? ???.
-    url: jdbc:mysql://127.0.0.1:3306/movie_db?serverTimezone=UTC
+    url: jdbc:mysql://127.0.0.1:3306/movie_db?createDatabaseIfNotExist=true
     #    mysql? ??? ??? ?? ??? ?? ???.
     username: root
     password: 1234
