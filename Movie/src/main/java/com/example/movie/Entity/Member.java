@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,8 +18,11 @@ public class Member extends BaseTime{
     @Id @GeneratedValue
     private Long id;
 
+    @NotEmpty
     private String memberId;
+    @NotEmpty
     private String password;
+    @NotEmpty
     private String userName;
     private String userMovieTag;
 
