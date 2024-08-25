@@ -25,6 +25,18 @@
                 </button>
             </form>
         </div>
+        <div class="col">
+            <button class="w-100 btn btn-secondary btn-lg" type="button"
+                    th:onclick="|location.href='@{/movie/list}'|">
+                영화 검색
+            </button>
+        </div>
+        <div class="col">
+            <button class="w-100 btn btn-secondary btn-lg" type="button"
+                    th:onclick="|location.href='@{/getmovielist}'|">
+                영화 목록 없으면 클릭
+            </button>
+        </div>
     </div>
     <hr class="my-4">
 </div>

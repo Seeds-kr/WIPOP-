@@ -3,13 +3,9 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-<<<<<<< Updated upstream
-    url: jdbc:mysql://127.0.0.1:3306/movie_db?serverTimezone=UTC
-=======
     #    ?? PC? ????? Database??? ?? ???.
     url: jdbc:mysql://127.0.0.1:3306/movie_db?createDatabaseIfNotExist=true
     #    mysql? ??? ??? ?? ??? ?? ???.
->>>>>>> Stashed changes
     username: root
     password: 1234
   thymeleaf:
@@ -19,13 +15,13 @@ spring:
   jpa:
     database-platform: org.hibernate.dialect.MySQL8Dialect
     open-in-view: false
-    show-sql: false
+    show-sql: true
     hibernate:
-      ddl-auto: none
+      ddl-auto: create
     properties:
       hibernate:
         #        show_sql: true
-        format_sql: false
+        format_sql: true
         use_sql_comments: true # querydsl에서 jpql 보고 싶다면
         dialect: org.hibernate.dialect.MySQL8Dialect
 
