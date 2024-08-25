@@ -7,18 +7,19 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-@RestController
+@Controller
 @RequiredArgsConstructor
 public class LoginController{
 
     private final LoginService loginService;
 
     @GetMapping("/login")
-    public String login(){
-        return "Hello";
+    public String loginForm(@ModelAttribute("loginForm") LoginForm form){
+        return "login/loginForm";
     }
 
     // loginForm이 로그인 페이지라는 가정
