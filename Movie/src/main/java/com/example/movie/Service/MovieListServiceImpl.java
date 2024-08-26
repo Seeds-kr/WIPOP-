@@ -53,6 +53,26 @@ public class MovieListServiceImpl implements MovieListService{
     }
 
     @Override
+    public PageResultDTO<MovieInfoDTO, Object[]> getResult(PageRequestDTO requestDTO,String keyword){
+        Pageable pageable= requestDTO.getPageable(Sort.by("id").ascending());
+        Page<Object[]> result = movieInfoRepository.getMovieWithName(pageable,keyword);
+
+
+        Function<Object[],MovieInfoDTO> fn = ( arr->entitiesToDTO(
+                (Long) arr[0],
+                (String) arr[1],
+                (String) arr[2],
+                (String) arr[3],
+                (String) arr[4],
+                (String) arr[5],
+                (String) arr[6],
+                (double) arr[7]
+        )
+        );
+        return new PageResultDTO<>(result,fn);
+    }
+
+    @Override
     public MovieInfoDTO getMovie(Long id) {
 
         List<Object[]> result = movieInfoRepository.getMovieWithAll(id);

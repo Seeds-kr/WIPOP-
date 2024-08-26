@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/movie")
@@ -23,6 +24,14 @@ public class MovieListController {
         log.info("pageRequestDTO: "+ pageRequestDTO);
         model.addAttribute("result", movieListService.getList(pageRequestDTO));
         return "List";
+    }
+
+    @GetMapping("list/result")
+    public String result(PageRequestDTO pageRequestDTO,String keyword, Model model){
+        log.info("pageRequestDTO: "+ pageRequestDTO);
+        model.addAttribute("result", movieListService.getResult(pageRequestDTO,keyword));
+        model.addAttribute("keyword", keyword);
+        return "result";
     }
 
     @GetMapping({"/read", "/modify"})

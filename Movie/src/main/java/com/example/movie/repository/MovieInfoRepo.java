@@ -17,4 +17,10 @@ public interface MovieInfoRepo extends JpaRepository<MovieInfoEntity, Long>
 
     @Query("select  m.id , m.movieName, m.movieNameK, m.genres, m.movieInfo, m.posterURL, m.releaseDate, m.rating from MovieInfoEntity as m where m.id = :id")
     List<Object[]> getMovieWithAll(Long id);
+
+    @Query("select  m.id , m.movieName, m.movieNameK, m.genres, m.movieInfo, m.posterURL, m.releaseDate, m.rating from MovieInfoEntity as m where m.genres = :genre")
+    Page<Object[]> getMovieWithGenre(Pageable pageable,String genre);
+
+    @Query("select  m.id , m.movieName, m.movieNameK, m.genres, m.movieInfo, m.posterURL, m.releaseDate, m.rating from MovieInfoEntity as m where m.movieName LIKE %:name% or m.movieNameK Like %:name%")
+    Page<Object[]> getMovieWithName(Pageable pageable,String name);
 }

@@ -2,6 +2,30 @@
 
 <th:block>
 
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <style>
+            .tf-search{
+
+                height: 40px;
+                width: 300px;
+                font-size: 20px;
+                border-radius: 4px;
+            }
+        </style>
+    </head>
+
+    <body>
+    <div>
+        <form th:action="@{/movie/list/result}" method="get">
+            <input type="text" name="keyword" class="tf-search" placeholder="🔍Search...">
+            <button type="submit">검색</button>
+        </form>
+    </div>
+    </body>
+    </html>
+
     <th:block th:fragment="content">
 
         <form action="/movie/list" method="get" id="searchForm">

@@ -28,7 +28,7 @@
 
     <th:block th:fragment="content">
 
-        <form action="/movie/list" method="get" id="searchForm">
+        <form action="/movie/list/result" method="get" id="searchForm">
             <input type="hidden" name="page" value="1">
         </form>
 
@@ -61,17 +61,17 @@
         <ul class="pagination h-100 justify-content-center align-items-center">
 
             <li class="page-item " th:if="${result.prev}">
-                <a class="page-link" th:href="@{/movie/list(page= ${result.start -1})}" tabindex="-1">Previous</a>
+                <a class="page-link" th:href="@{/movie/list/result(keyword=${keyword},page= ${result.start -1})}" tabindex="-1">Previous</a>
             </li>
 
             <li th:class=" 'page-item ' + ${result.page == page?'active':''} " th:each="page: ${result.pageList}">
-                <a class="page-link" th:href="@{/movie/list(page = ${page})}">
+                <a class="page-link" th:href="@{/movie/list/result(keyword = ${keyword},page = ${page})}">
                     [[${page}]]
                 </a>
             </li>
 
             <li class="page-item" th:if="${result.next}">
-                <a class="page-link" th:href="@{/movie/list(page= ${result.end + 1} )}">Next</a>
+                <a class="page-link" th:href="@{/movie/list/result(keyword=${keyword},page= ${result.end + 1} )}">Next</a>
             </li>
         </ul>
 
