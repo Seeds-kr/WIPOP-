@@ -12,7 +12,7 @@ public interface MovieListService {
     Long register(MovieInfoDTO movieInfoDTO);
     MovieInfoDTO getMovie(Long id);
     PageResultDTO<MovieInfoDTO, Object[]> getList(PageRequestDTO pageRequestDTO);
-    PageResultDTO<MovieInfoDTO, Object[]> getResult(PageRequestDTO requestDTO, String keyword);
+    PageResultDTO<MovieInfoDTO, Object[]> getResult(PageRequestDTO requestDTO, String type,String keyword);
 
     default Map<String, Object> dtoToEntity(MovieInfoDTO movieInfoDTO){
         //Map타입으로 반환

@@ -19,6 +19,14 @@
     <body>
     <div>
         <form th:action="@{/movie/list/result}" method="get">
+            <select name="type">
+                <option selected value="">검색 내용 선택</option>
+                <option value="title">제목</option>
+                <option value="genre">장르</option>
+                <option value="keyword">키워드</option>
+                <option value="releaseDate">개봉일</option>
+                <option value="rating">평점</option>
+            </select>
             <input type="text" name="keyword" class="tf-search" placeholder="🔍Search...">
             <button type="submit">검색</button>
         </form>
@@ -61,17 +69,17 @@
         <ul class="pagination h-100 justify-content-center align-items-center">
 
             <li class="page-item " th:if="${result.prev}">
-                <a class="page-link" th:href="@{/movie/list/result(keyword=${keyword},page= ${result.start -1})}" tabindex="-1">Previous</a>
+                <a class="page-link" th:href="@{/movie/list/result(type=${type},keyword=${keyword},page= ${result.start -1})}" tabindex="-1">Previous</a>
             </li>
 
             <li th:class=" 'page-item ' + ${result.page == page?'active':''} " th:each="page: ${result.pageList}">
-                <a class="page-link" th:href="@{/movie/list/result(keyword = ${keyword},page = ${page})}">
+                <a class="page-link" th:href="@{/movie/list/result(type=${type},keyword = ${keyword},page = ${page})}">
                     [[${page}]]
                 </a>
             </li>
 
             <li class="page-item" th:if="${result.next}">
-                <a class="page-link" th:href="@{/movie/list/result(keyword=${keyword},page= ${result.end + 1} )}">Next</a>
+                <a class="page-link" th:href="@{/movie/list/result(type=${type},keyword=${keyword},page= ${result.end + 1} )}">Next</a>
             </li>
         </ul>
 

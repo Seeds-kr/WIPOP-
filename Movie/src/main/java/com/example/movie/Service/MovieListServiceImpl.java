@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.function.Function;
 
 @Service
@@ -53,9 +54,28 @@ public class MovieListServiceImpl implements MovieListService{
     }
 
     @Override
-    public PageResultDTO<MovieInfoDTO, Object[]> getResult(PageRequestDTO requestDTO,String keyword){
+    public PageResultDTO<MovieInfoDTO, Object[]> getResult(PageRequestDTO requestDTO,String type,String keyword){
         Pageable pageable= requestDTO.getPageable(Sort.by("id").ascending());
-        Page<Object[]> result = movieInfoRepository.getMovieWithName(pageable,keyword);
+        Page<Object[]> result;
+        if(Objects.equals(type, "title")){
+            result = movieInfoRepository.getMovieWithName(pageable,keyword);
+        }
+        else if(Objects.equals(type, "genre")){
+            keyword = changeGenresR(keyword);
+            result = movieInfoRepository.getMovieWithGenre(pageable,keyword);
+        }
+        else if(Objects.equals(type, "keyword")){
+            result = movieInfoRepository.getMovieWithInfo(pageable,keyword);
+        }
+        else if(Objects.equals(type, "releaseDate")){
+            result = movieInfoRepository.getMovieWithDate(pageable,keyword);
+        }
+        else if(Objects.equals(type, "rating")){
+            result = movieInfoRepository.getMovieWithRate(pageable,Double.parseDouble(keyword));
+        }
+        else{
+            result = movieInfoRepository.getMovieWithName(pageable,keyword);
+        }
 
 
         Function<Object[],MovieInfoDTO> fn = ( arr->entitiesToDTO(
@@ -149,6 +169,77 @@ public class MovieListServiceImpl implements MovieListService{
                 }
                 else if(genres.contains("37")){
                     genres = genres.replace("37","서부");
+                }
+                else{
+                    break;
+                }
+            }
+
+        }
+        return genres;
+    }
+
+    //장르 역변환기
+    public String changeGenresR(String genres) {
+        if(genres!=null){
+
+            while(true){
+                if(genres.contains("액션")){
+                    genres = genres.replace("액션","28");
+                }
+                else if(genres.contains("모험")){
+                    genres = genres.replace("모험","12");
+                }
+                else if(genres.contains("애니메이션")){
+                    genres = genres.replace("애니메이션","16");
+                }
+                else if(genres.contains("코미디")){
+                    genres = genres.replace("코미디","35");
+                }
+                else if(genres.contains("범죄")){
+                    genres = genres.replace("범죄","80");
+                }
+                else if(genres.contains("다큐멘터리")){
+                    genres = genres.replace("다큐멘터리","99");
+                }
+                else if(genres.contains("드라마")){
+                    genres = genres.replace("드라마","18");
+                }
+                else if(genres.contains("가족")){
+                    genres = genres.replace("가족","10751");
+                }
+                else if(genres.contains("판타지")){
+                    genres = genres.replace("판타지","14");
+                }
+                else if(genres.contains("역사")){
+                    genres = genres.replace("역사","36");
+                }
+                else if(genres.contains("공포")){
+                    genres = genres.replace("공포","27");
+                }
+                else if(genres.contains("음악")){
+                    genres = genres.replace("음악","10402");
+                }
+                else if(genres.contains("미스터리")){
+                    genres = genres.replace("미스터리","9648");
+                }
+                else if(genres.contains("로맨스")){
+                    genres = genres.replace("로맨스","10749");
+                }
+                else if(genres.contains("SF")){
+                    genres = genres.replace("SF","878");
+                }
+                else if(genres.contains("TV 영화")){
+                    genres = genres.replace("TV 영화","10770");
+                }
+                else if(genres.contains("스릴러")){
+                    genres = genres.replace("스릴러","53");
+                }
+                else if(genres.contains("전쟁")){
+                    genres = genres.replace("전쟁","10752");
+                }
+                else if(genres.contains("서부")){
+                    genres = genres.replace("서부","37");
                 }
                 else{
                     break;
