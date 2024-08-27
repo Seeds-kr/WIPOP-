@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Page</title>
+</head>
+<body>
+
+<h1>Welcome, <span th:text="${userName}">User</span>!</h1>
+
+<h2>Your Movie Recommendations</h2>
+<ul>
+    <li th:each="movie : ${recommendedMovies}">
+        <h3 th:text="${movie.movieName}">Movie Name</h3>
+        <p>Genres: <span th:text="${movie.genres}">Genres</span></p>
+        <p>Rating: <span th:text="${movie.rating}">Rating</span></p>
+    </li>
+</ul>
+
+</body>
+</html>
+<!--mainPage.html-->

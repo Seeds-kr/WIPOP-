@@ -1,9 +1,6 @@
 package com.example.movie.Entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,7 +10,7 @@ import java.util.List;
 
 @Entity
 @Getter @Setter
-public class Member extends BaseTime{
+public class Member extends BaseTime {
 
     @Id @GeneratedValue
     private Long id;
@@ -26,10 +23,10 @@ public class Member extends BaseTime{
     private String userName;
     private String userMovieTag;
 
-    @OneToMany(mappedBy = "member")
+    @OneToMany(mappedBy = "member", fetch = FetchType.EAGER) // EAGER로 설정
     private List<Review> reviews = new ArrayList<>();
 
-    @OneToMany(mappedBy = "member")
+    @OneToMany(mappedBy = "member", fetch = FetchType.EAGER) // EAGER로 설정
     private List<MovieInfoEntity> movies = new ArrayList<>();
 
     public void addReview(Review review){
@@ -37,3 +34,4 @@ public class Member extends BaseTime{
         review.setMember(this);
     }
 }
+
