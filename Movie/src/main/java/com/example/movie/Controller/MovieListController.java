@@ -27,11 +27,13 @@ public class MovieListController {
     }
 
     @GetMapping("list/result")
-    public String result(PageRequestDTO pageRequestDTO,String keyword,String type, Model model){
+    public String result(PageRequestDTO pageRequestDTO,String keyword,String type,String sort,String ad, Model model){
         log.info("pageRequestDTO: "+ pageRequestDTO);
-        model.addAttribute("result", movieListService.getResult(pageRequestDTO,type,keyword));
+        model.addAttribute("result", movieListService.getResult(pageRequestDTO,type,sort,ad,keyword));
         model.addAttribute("keyword", keyword);
         model.addAttribute("type",type);
+        model.addAttribute("sort",sort);
+        model.addAttribute("ad",ad);
         return "result";
     }
 

@@ -3,6 +3,7 @@ package com.example.movie.Entity;
 import com.example.movie.dto.MovieInfoDTO;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.validator.constraints.UniqueElements;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +21,8 @@ public class MovieInfoEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // auto_increment
     private Long id;
+    @Column(unique = true)
+    private Long movieId;
     @Column
     private String movieName;
     @Column
@@ -45,6 +48,7 @@ public class MovieInfoEntity {
     public static MovieInfoEntity toMovieInfoEntity(MovieInfoDTO movieinfoDTO){
         MovieInfoEntity movieInfoEntity = new MovieInfoEntity();
         movieInfoEntity.setId(movieinfoDTO.getId());
+        movieInfoEntity.setMovieId(movieinfoDTO.getMovieId());
         movieInfoEntity.setMovieName(movieinfoDTO.getMovieName());
         movieInfoEntity.setMovieNameK(movieinfoDTO.getMovieNameK());
         movieInfoEntity.setPosterURL(movieinfoDTO.getPosterURL());

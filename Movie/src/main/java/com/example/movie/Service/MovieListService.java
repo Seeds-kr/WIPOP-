@@ -12,7 +12,7 @@ public interface MovieListService {
     Long register(MovieInfoDTO movieInfoDTO);
     MovieInfoDTO getMovie(Long id);
     PageResultDTO<MovieInfoDTO, Object[]> getList(PageRequestDTO pageRequestDTO);
-    PageResultDTO<MovieInfoDTO, Object[]> getResult(PageRequestDTO requestDTO, String type,String keyword);
+    PageResultDTO<MovieInfoDTO, Object[]> getResult(PageRequestDTO requestDTO, String type,String sort,String ad,String keyword);
 
     default Map<String, Object> dtoToEntity(MovieInfoDTO movieInfoDTO){
         //Map타입으로 반환
@@ -28,9 +28,10 @@ public interface MovieListService {
         return entityMap;
     }
 
-    default MovieInfoDTO entitiesToDTO(Long id,String mn,String mk,String genres,String mi, String url,String rDate,double rating){
+    default MovieInfoDTO entitiesToDTO(Long id,Long movieId,String mn,String mk,String genres,String mi, String url,String rDate,double rating){
         MovieInfoDTO movieInfoDTO = MovieInfoDTO.builder()
                 .id(id)
+                .movieId(movieId)
                 .movieName(mn)
                 .movieNameK(mk)
                 .genres(genres)

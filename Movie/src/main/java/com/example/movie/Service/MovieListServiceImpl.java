@@ -41,22 +41,68 @@ public class MovieListServiceImpl implements MovieListService{
 
         Function<Object[],MovieInfoDTO> fn = ( arr->entitiesToDTO(
                 (Long) arr[0],
-                (String) arr[1],
+                (Long) arr[1],
                 (String) arr[2],
                 (String) arr[3],
                 (String) arr[4],
                 (String) arr[5],
                 (String) arr[6],
-                (double) arr[7]
+                (String) arr[7],
+                (double) arr[8]
                 )
                 );
         return new PageResultDTO<>(result,fn);
     }
 
     @Override
-    public PageResultDTO<MovieInfoDTO, Object[]> getResult(PageRequestDTO requestDTO,String type,String keyword){
-        Pageable pageable= requestDTO.getPageable(Sort.by("id").ascending());
+    public PageResultDTO<MovieInfoDTO, Object[]> getResult(PageRequestDTO requestDTO,String type,String sort,String ad,String keyword){
+        Pageable pageable;
         Page<Object[]> result;
+
+        //정렬 기준
+        if(Objects.equals(sort, "title")){
+            if(Objects.equals(ad, "ac")){
+                pageable = requestDTO.getPageable(Sort.by("movieName").ascending());
+            }
+            else{
+                pageable = requestDTO.getPageable(Sort.by("movieName").descending());
+            }
+        }
+        else if(Objects.equals(sort, "genre")){
+            keyword = changeGenresR(keyword);
+            if(Objects.equals(ad, "ac")){
+                pageable = requestDTO.getPageable(Sort.by("genres").ascending());
+            }
+            else{
+                pageable = requestDTO.getPageable(Sort.by("genres").descending());
+            }
+        }
+        else if(Objects.equals(sort, "releaseDate")){
+            if(Objects.equals(ad, "ac")){
+                pageable = requestDTO.getPageable(Sort.by("releaseDate").ascending());
+            }
+            else{
+                pageable = requestDTO.getPageable(Sort.by("releaseDate").descending());
+            }
+        }
+        else if(Objects.equals(sort, "rating")){
+            if(Objects.equals(ad, "ac")){
+                pageable = requestDTO.getPageable(Sort.by("rating").ascending());
+            }
+            else{
+                pageable = requestDTO.getPageable(Sort.by("rating").descending());
+            }
+        }
+        else{
+            if(Objects.equals(ad, "ac")){
+                pageable = requestDTO.getPageable(Sort.by("id").ascending());
+            }
+            else{
+                pageable = requestDTO.getPageable(Sort.by("id").descending());
+            }
+        }
+
+        //검색 기준
         if(Objects.equals(type, "title")){
             result = movieInfoRepository.getMovieWithName(pageable,keyword);
         }
@@ -80,13 +126,14 @@ public class MovieListServiceImpl implements MovieListService{
 
         Function<Object[],MovieInfoDTO> fn = ( arr->entitiesToDTO(
                 (Long) arr[0],
-                (String) arr[1],
+                (Long) arr[1],
                 (String) arr[2],
                 (String) arr[3],
                 (String) arr[4],
                 (String) arr[5],
                 (String) arr[6],
-                (double) arr[7]
+                (String) arr[7],
+                (double) arr[8]
         )
         );
         return new PageResultDTO<>(result,fn);
@@ -96,16 +143,17 @@ public class MovieListServiceImpl implements MovieListService{
     public MovieInfoDTO getMovie(Long id) {
 
         List<Object[]> result = movieInfoRepository.getMovieWithAll(id);
-        String movieName = (String) result.get(0)[1];
-        String movieNameK = (String) result.get(0)[2];
-        String genres = (String) result.get(0)[3];
-        String movieInfo = (String) result.get(0)[4];
-        String url = (String) result.get(0)[5];
-        String releaseDate = (String) result.get(0)[6];
-        Double rating = (Double) result.get(0)[7];
+        Long movieId = (Long) result.get(0)[1];
+        String movieName = (String) result.get(0)[2];
+        String movieNameK = (String) result.get(0)[3];
+        String genres = (String) result.get(0)[4];
+        String movieInfo = (String) result.get(0)[5];
+        String url = (String) result.get(0)[6];
+        String releaseDate = (String) result.get(0)[7];
+        Double rating = (Double) result.get(0)[8];
         genres = changeGenres(genres);
 
-        return entitiesToDTO(id,movieName, movieNameK, genres, movieInfo,  url, releaseDate, rating);
+        return entitiesToDTO(id,movieId,movieName, movieNameK, genres, movieInfo,  url, releaseDate, rating);
     }
 
     //장르 변환기

@@ -62,21 +62,24 @@ public class MovieInfoController {
             int i=0;
             //필요한 정보만 받아오는 부분
             for (Map obj : dboxoffList) {
-                mnList.put("객체 번호" + i, obj.getOrDefault("id","null"));
-                mnList.put("영화 이름" + i, obj.getOrDefault("title","null"));
-                mnList.put("영화 원제" + i, obj.getOrDefault("original_title","null"));
-                mnList.put("영화 출시일" + i, obj.getOrDefault("release_date","null"));
-                mnList.put("영화 평점" + i, obj.getOrDefault("vote_average","null"));
-                mnList.put("영화 소개" + i, obj.getOrDefault("overview","null"));
+                mnList.put(i, obj.getOrDefault("id","0"));
+                mnList.put("영화 이름" + i, obj.getOrDefault("title", "null"));
+                mnList.put("영화 원제" + i, obj.getOrDefault("original_title", "null"));
+                mnList.put("영화 출시일" + i, obj.getOrDefault("release_date", "null"));
+                mnList.put("영화 평점" + i, obj.getOrDefault("vote_average", "null"));
+                mnList.put("영화 소개" + i, obj.getOrDefault("overview", "null"));
                 mnList.put("영화 포스터" + i, obj.get("poster_path"));
+                mnList.put("영화 장르" + i, obj.getOrDefault("genre_ids", "null"));
 
                 //DB에 정보 전달하는 부분
                 MovieInfoDTO movieInfoDTO = new MovieInfoDTO();
-                movieInfoDTO.setMovieNameK(mnList.getOrDefault("영화 이름" + i,"null").toString());
-                movieInfoDTO.setMovieName(mnList.getOrDefault("영화 원제" + i,"null").toString());
-                movieInfoDTO.setReleaseDate(mnList.getOrDefault("영화 출시일" + i,"null").toString());
-                movieInfoDTO.setRating(Double.parseDouble(mnList.getOrDefault("영화 평점" + i,"null").toString()));
-                movieInfoDTO.setMovieInfo(mnList.getOrDefault("영화 소개" + i,"null").toString());
+                movieInfoDTO.setMovieId(Long.parseLong(mnList.getOrDefault(i,"0").toString()));
+                movieInfoDTO.setMovieNameK(mnList.getOrDefault("영화 이름" + i, "null").toString());
+                movieInfoDTO.setMovieName(mnList.getOrDefault("영화 원제" + i, "null").toString());
+                movieInfoDTO.setReleaseDate(mnList.getOrDefault("영화 출시일" + i, "null").toString());
+                movieInfoDTO.setRating(Double.parseDouble(mnList.getOrDefault("영화 평점" + i, "null").toString()));
+                movieInfoDTO.setMovieInfo(mnList.getOrDefault("영화 소개" + i, "null").toString());
+                movieInfoDTO.setGenres(mnList.getOrDefault("영화 장르" + i, "null").toString());
                 //TMDB에서 포스터 경로가 없으면 null로 저장해서 예외 처리
                 if(mnList.get("영화 포스터" + i) == null){
                     movieInfoDTO.setPosterURL("");
@@ -134,7 +137,7 @@ public class MovieInfoController {
                 int i = 0;
                 //필요한 정보만 받아오는 부분
                 for (Map obj : dboxoffList) {
-                    mnList.put("객체 번호" + i, obj.getOrDefault("id", "null"));
+                    mnList.put(i, obj.getOrDefault("id","0"));
                     mnList.put("영화 이름" + i, obj.getOrDefault("title", "null"));
                     mnList.put("영화 원제" + i, obj.getOrDefault("original_title", "null"));
                     mnList.put("영화 출시일" + i, obj.getOrDefault("release_date", "null"));
@@ -145,6 +148,7 @@ public class MovieInfoController {
 
                     //DB에 정보 전달하는 부분
                     MovieInfoDTO movieInfoDTO = new MovieInfoDTO();
+                    movieInfoDTO.setMovieId(Long.parseLong(mnList.getOrDefault(i,"0").toString()));
                     movieInfoDTO.setMovieNameK(mnList.getOrDefault("영화 이름" + i, "null").toString());
                     movieInfoDTO.setMovieName(mnList.getOrDefault("영화 원제" + i, "null").toString());
                     movieInfoDTO.setReleaseDate(mnList.getOrDefault("영화 출시일" + i, "null").toString());

@@ -12,6 +12,7 @@ import lombok.*;
 
 public class MovieInfoDTO {
     private Long id;
+    private Long movieId;
     private String movieName;
     private String movieNameK;
     private String posterURL;
