@@ -1,5 +1,7 @@
 package com.example.movie.Controller;
 
+import com.example.movie.Entity.MovieInfoEntity;
+import com.example.movie.dto.MovieInfoDTO;
 import com.example.movie.repository.MovieInfoRepo;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
@@ -61,10 +63,11 @@ public class MovieChartController {
                 mnList.put("영화 이름" + i, obj.get("movieNm"));
                 mnList.put("영화 매출" + i, obj.get("salesAcc"));
                 mnList.put("영화 누적 관객수" + i, obj.get("audiAcc"));
-            //DB에 정보 전달하는 부분
-                //MovieDTO movieDTO = new MovieDTO();
-                //movieDTO.setMovieName(mnList.get("영화 이름" + i).toString());
-                //movieRepository.save(MovieEntity.toMovieEntity(movieDTO));
+//            DB에 정보 전달하는 부분
+//                MovieInfoDTO movieInfoDTO = new MovieInfoDTO();
+//                movieInfoDTO.setMovieName(obj.get("movieNm").toString());
+//                movieInfoRepo.save(MovieInfoEntity.toMovieInfoEntity(movieInfoDTO));
+
 
                 i++;
             }
