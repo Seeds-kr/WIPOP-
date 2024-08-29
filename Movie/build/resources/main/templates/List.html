@@ -1,10 +1,11 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-
 <th:block>
 
     <!DOCTYPE html>
     <html lang="en">
     <head>
+        <meta charset="utf-8">
+        <link th:href="@{/css/css/bootstrap.min.css}" rel="stylesheet">
         <style>
             .tf-search{
 
@@ -79,7 +80,7 @@
             </tbody>
         </table>
 
-        <ul class="pagination h-100 justify-content-center align-items-center">
+        <ul class="pagination">
 
             <li class="page-item " th:if="${result.prev}">
                 <a class="page-link" th:href="@{/movie/list(page= ${result.start -1})}" tabindex="-1">Previous</a>
@@ -100,6 +101,7 @@
         <script th:inline="javascript">
 
         </script>
+
     </th:block>
 
 </th:block>
