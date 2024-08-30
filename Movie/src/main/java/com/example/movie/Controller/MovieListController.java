@@ -26,6 +26,13 @@ public class MovieListController {
         return "List";
     }
 
+    @GetMapping("index")
+    public String index(PageRequestDTO pageRequestDTO, Model model){
+        log.info("pageRequestDTO: "+ pageRequestDTO);
+        model.addAttribute("result", movieListService.getList(pageRequestDTO));
+        return "index";
+    }
+
     @GetMapping("list/result")
     public String result(PageRequestDTO pageRequestDTO,String keyword,String type,String sort,String ad, Model model){
         log.info("pageRequestDTO: "+ pageRequestDTO);
