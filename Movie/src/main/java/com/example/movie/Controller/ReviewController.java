@@ -11,6 +11,7 @@ import com.example.movie.repository.MovieInfoRepo;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
+@Slf4j
 @RequestMapping("/review")
 @RequiredArgsConstructor
 public class ReviewController {
@@ -26,11 +28,13 @@ public class ReviewController {
     private final MovieInfoService movieInfoService;
 
     @GetMapping("/{movieId}")
-    public String getMovie(@PathVariable Long movieId, Model model){
+    public String getMovie(@PathVariable Long movieId, Model model, HttpServletRequest request){
+
         List<Review> reviews = reviewService.getReviewsByMovie(movieId);
         MovieInfoEntity movie = movieInfoService.findMovie(movieId);
+        Member member = (Member) request.getSession().getAttribute(SessionConst.LOGIN_MEMBER);
 
-        ReviewDto reviewDto = new ReviewDto();
+        ReviewDto reviewDto = new ReviewDto(movieId);
 
         model.addAttribute("reviewDto", reviewDto);
         model.addAttribute("reviews", reviews);
@@ -50,13 +54,14 @@ public class ReviewController {
     }
 
     @PostMapping("/{movieId}/add")
-    public String addReview(@ModelAttribute ReviewDto reviewDto, HttpServletRequest request){
+    public String addReview(@PathVariable Long movieId, @ModelAttribute ReviewDto reviewDto, HttpServletRequest request){
         HttpSession session = request.getSession();
         Member member = (Member) session.getAttribute(SessionConst.LOGIN_MEMBER);
 
+        log.info("add" + member);
         reviewDto.setMemberId(member.getId());
         reviewService.addReview(reviewDto);
 
-        return "redirect:/review/movie/" + reviewDto.getMovieId();
+        return "redirect:/review/" + movieId;
     }
 }

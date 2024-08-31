@@ -15,9 +15,8 @@ public class ReviewDto {
     private Long movieId;
     private Long score;
     private String body;
-
-    public ReviewDto(Long memberId, Long movieId) {
-        this.memberId = memberId;
+    private String title;
+    public ReviewDto(Long movieId) {
         this.movieId = movieId;
     }
 }
