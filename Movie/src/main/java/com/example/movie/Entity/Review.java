@@ -20,15 +20,16 @@ public class Review extends BaseTime{
     private String title;
     private Long score;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "member_id")
     private Member member;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "movieentity_id")
     private MovieInfoEntity movie;
 
-    public Review(String body, Member member, MovieInfoEntity movie, Long score) {
+    public Review(String title, String body, Member member, MovieInfoEntity movie, Long score) {
+        this.title = title;
         this.body = body;
         this.member = member;
         this.movie = movie;

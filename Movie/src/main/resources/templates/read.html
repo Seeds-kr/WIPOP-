@@ -39,7 +39,7 @@
         <style>
             .uploadResult {
                 width: 100%;
-                background-color: gray;
+                background-color: grey;
                 margin-top: 10px;
             }
 
@@ -71,8 +71,9 @@
         </div>
 
 
-        <button type="button" class="btn btn-primary">
-            [리뷰 개수] <span class="badge badge-light">리뷰 보기(View Reviews)</span>
+        <button type="button" class="btn btn-primary"
+                th:onclick="|location.href='/review/' + ${dto.id}|">
+        [리뷰 개수] <span class="badge badge-light">리뷰 보기(View Reviews)</span>
         </button>
 
 

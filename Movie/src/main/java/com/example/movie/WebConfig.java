@@ -14,9 +14,9 @@ public class WebConfig implements WebMvcConfigurer {
                 .order(1)
                 .addPathPatterns("/**")
                 // 로그인 상관 없이 접속 가능한 url 목록 / 테스트 시 포합시켜서
-                .excludePathPatterns("/", "/members/add", "/login", "/logout", "/review/**",
+                .excludePathPatterns("/", "/members/add", "/login", "/logout",
                         "/css/**", "/*.ico", "/error",
-                        "/movie", "movieinfo", "/");
+                        "/movie", "/movieinfo", "/");
     }
 
 }

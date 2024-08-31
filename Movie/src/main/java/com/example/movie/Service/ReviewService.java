@@ -29,7 +29,7 @@ public class ReviewService {
         MovieInfoEntity findMovie = movieInfoRepo.findById(reviewDto.getMovieId())
                 .orElseThrow(() -> new IllegalArgumentException("Invalid movie ID"));
 
-        Review review = new Review(reviewDto.getBody(), findMember, findMovie, reviewDto.getScore());
+        Review review = new Review(reviewDto.getTitle(), reviewDto.getBody(), findMember, findMovie, reviewDto.getScore());
 
         findMember.addReview(review);
         findMovie.addReview(review);
