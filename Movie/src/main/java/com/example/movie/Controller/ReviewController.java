@@ -21,16 +21,20 @@ public class ReviewController {
 
     private final ReviewService reviewService;
 
-    @GetMapping("/movie/{movieId}")
+    @GetMapping("/{movieId}")
     public String getMovie(@PathVariable Long movieId, Model model){
         List<Review> reviews = reviewService.getReviewsByMovie(movieId);
+
+        ReviewDto reviewDto = new ReviewDto();
+
+        model.addAttribute("reviewDto", reviewDto);
         model.addAttribute("reviews", reviews);
         model.addAttribute("movieId", movieId);
 
-        return "comments";// 템플릿
+        return "review";// 템플릿
     }
 
-    @GetMapping("/add")
+    @GetMapping("/{movieId}/add")
     public String ReviewForm(@RequestParam Long movieId, Model model){
         ReviewDto reviewDto = new ReviewDto();
         reviewDto.setMovieId(movieId);
@@ -39,7 +43,7 @@ public class ReviewController {
         return "add_comment";
     }
 
-    @PostMapping("/add")
+    @PostMapping("/{movieId}/add")
     public String addReview(@ModelAttribute ReviewDto reviewDto, HttpServletRequest request){
         HttpSession session = request.getSession();
         Member member = (Member) session.getAttribute(SessionConst.LOGIN_MEMBER);
