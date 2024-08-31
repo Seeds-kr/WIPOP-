@@ -19,7 +19,7 @@ public class PageRequestDTO<DTO, EN> {
 
     public PageRequestDTO(){ //초기값
         this.page = 1;
-        this.size = 10;
+        this.size = 12;
     }
 
     public Pageable getPageable(Sort sort){
