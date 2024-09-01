@@ -25,14 +25,20 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
                     <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#!">Account</a></li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">List</a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#!">All Products</a></li>
+                        <a class="nav-link dropdown-toggle" id="accountBarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Account</a>
+                        <ul class="dropdown-menu" aria-labelledby="accountBarDropdown">
+                            <li><a class="dropdown-item" href="#!">계정 정보</a></li>
                             <li><hr class="dropdown-divider" /></li>
-                            <li><a class="dropdown-item" href="#!">Popular Items</a></li>
-                            <li><a class="dropdown-item" href="#!">New Arrivals</a></li>
+                            <li><a class="dropdown-item" href="#!">로그아웃</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="menuBarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Menu</a>
+                        <ul class="dropdown-menu" aria-labelledby="menuBarDropdown">
+                            <li><a class="dropdown-item" href="#!">영화 검색</a></li>
+                            <li><hr class="dropdown-divider" /></li>
+                            <li><a class="dropdown-item" href="#!">영화 추천</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -96,7 +102,7 @@
                                 <div class="card h-100">
                                     <!-- Product image-->
                                     <td><img th:if="${dto.getPosterURL() != null }"
-                                             th:src="|https://image.tmdb.org/t/p/w300${dto.getPosterURL()}|" >[[${dto.movieNameK}]]</td>
+                                             th:src="|https://image.tmdb.org/t/p/w300${dto.getPosterURL()}|" ></td>
                                     <!-- Product details-->
                                     <div class="card-body p-4">
                                         <div class="text-center">
