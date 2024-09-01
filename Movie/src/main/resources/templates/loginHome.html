@@ -3,21 +3,60 @@
 <head>
     <meta charset="utf-8">
     <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <style>
+        .movie-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            transition: box-shadow 0.3s ease;
+            cursor: pointer; /* Makes the card look clickable */
+        }
+
+        .movie-card img {
+            width: 100%;
+            height: auto;
+        }
+
+        .movie-card-body {
+            padding: 15px;
+        }
+
+        .movie-card:hover {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .rating {
+            color: #f39c12; /* Gold color for rating stars */
+        }
+
+        .movie-card-content {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .movie-card-content > * {
+            flex: 1;
+        }
+
+        .movie-card-body {
+            display: flex;
+            flex-direction: column;
+        }
+    </style>
 </head>
 <body>
 
 <div class="container" style="max-width: 600px">
     <div class="py-5 text-center">
-        <h2>Movie 🍿</h2> </div>
+        <h2>Movie 🍿</h2>
+    </div>
+
     <h4 class="mb-3" th:text="|로그인: ${member.userName}|">로그인 사용자 이름</h4>
     <hr class="my-4">
+
     <div class="row">
-<!--        <div class="col">-->
-<!--            <button class="w-100 btn btn-secondary btn-lg" type="button"-->
-<!--                    th:onclick="|location.href='@{/items}'|">-->
-<!--                상품 관리-->
-<!--            </button>-->
-<!--        </div>-->
         <div class="col">
             <form th:action="@{/logout}" method="post">
                 <button class="w-100 btn btn-dark btn-lg" type="submit">
@@ -39,4 +78,29 @@
         </div>
     </div>
     <hr class="my-4">
+
+    <!-- 추천 영화 목록 표시 -->
+    <div>
+        <h4>추천 영화 목록</h4>
+        <div class="row">
+            <div class="col-md-4" th:each="movie : ${recommendedMovies}">
+                <div class="movie-card" th:onclick="|location.href='@{/movie/read(id=${movie.id})}'|">
+                    <div class="movie-card-content">
+                        <img th:if="${movie.posterURL != null}"
+                             th:src="|https://image.tmdb.org/t/p/w300${movie.posterURL}|"
+                             alt="Poster">
+                        <div class="movie-card-body">
+                            <h5 th:text="${movie.movieName}">Movie Name</h5>
+                            <p class="rating">
+                                <span th:text="'Rating: ' + ${movie.rating}">Rating</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+</body>
+</html>
