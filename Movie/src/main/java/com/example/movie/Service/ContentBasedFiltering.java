@@ -22,12 +22,12 @@ public class ContentBasedFiltering {
 
     // 사용자의 선호도에 따라 영화를 추천하는 메서드
     public List<MovieInfoEntity> recommendMovies(Member user, List<MovieInfoEntity> allMovies) {
-        // 사용자가 작성한 리뷰를 통해 선호 영화 리스트를 생성
         List<MovieInfoEntity> userReviewedMovies = user.getMovies();
 
         return allMovies.stream()
                 .filter(movie -> userReviewedMovies.stream()
                         .noneMatch(reviewedMovie -> reviewedMovie.getId().equals(movie.getId())))
+                .filter(movie -> movie.getRating() > 0)  // 레이팅이 0보다 큰 영화만 포함
                 .sorted((movie1, movie2) -> {
                     double sim1 = userReviewedMovies.stream()
                             .mapToDouble(reviewedMovie -> calculateSimilarity(reviewedMovie, movie1))

@@ -41,7 +41,7 @@ public class LoginController{
         session.setAttribute(SessionConst.LOGIN_MEMBER, loginMember);
 
         // 로그인 성공시 페이지-> 내가 접근한 페이지로
-        return "redirect:"+redirectURL;
+        return "redirect:/";
     }
 
     @PostMapping("/logout")
