@@ -23,10 +23,10 @@ public class Member extends BaseTime {
     private String userName;
     private String userMovieTag;
 
-    @OneToMany(mappedBy = "member", fetch = FetchType.EAGER) // EAGER로 설정
+    @OneToMany(mappedBy = "member", fetch = FetchType.EAGER)
     private List<Review> reviews = new ArrayList<>();
 
-    @OneToMany(mappedBy = "member", fetch = FetchType.EAGER) // EAGER로 설정
+    @OneToMany(mappedBy = "member", fetch = FetchType.EAGER)
     private List<MovieInfoEntity> movies = new ArrayList<>();
 
     public void addReview(Review review){
