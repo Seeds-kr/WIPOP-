@@ -10,16 +10,22 @@
             overflow: hidden;
             margin-bottom: 20px;
             transition: box-shadow 0.3s ease;
-            cursor: pointer; /* Makes the card look clickable */
+            cursor: pointer;
+            max-width: 300px; /* 카드의 최대 너비를 설정 */
+            height: 400px; /* 카드의 고정 높이 설정 */
+            display: flex;
+            flex-direction: column;
         }
 
         .movie-card img {
             width: 100%;
-            height: auto;
+            height: 200px; /* 이미지의 고정 높이 설정 */
+            object-fit: cover; /* 이미지 비율 유지 */
         }
 
         .movie-card-body {
             padding: 15px;
+            flex: 1; /* 카드 내용이 카드의 나머지 공간을 채우도록 설정 */
         }
 
         .movie-card:hover {
@@ -30,25 +36,16 @@
             color: #f39c12; /* Gold color for rating stars */
         }
 
-        .movie-card-content {
+        .row {
             display: flex;
-            flex-direction: column;
-            height: 100%;
-        }
-
-        .movie-card-content > * {
-            flex: 1;
-        }
-
-        .movie-card-body {
-            display: flex;
-            flex-direction: column;
+            flex-wrap: wrap; /* 카드가 여러 줄에 걸쳐 표시될 수 있도록 설정 */
+            gap: 20px; /* 카드 간의 간격 설정 */
         }
     </style>
 </head>
 <body>
 
-<div class="container" style="max-width: 600px">
+<div class="container" style="max-width: 1200px">
     <div class="py-5 text-center">
         <h2>Movie 🍿</h2>
     </div>
