@@ -12,7 +12,7 @@ public interface MovieListService {
     Long register(MovieInfoDTO movieInfoDTO);
     MovieInfoDTO getMovie(Long id);
     PageResultDTO<MovieInfoDTO, Object[]> getList(PageRequestDTO pageRequestDTO);
-    PageResultDTO<MovieInfoDTO, Object[]> getResult(PageRequestDTO requestDTO, String type,String sort,String ad,String keyword);
+    PageResultDTO<MovieInfoDTO, Object[]> getResult(PageRequestDTO requestDTO, String type,String genreClass,String sort,String ad,String keyword);
 
     default Map<String, Object> dtoToEntity(MovieInfoDTO movieInfoDTO){
         //Map타입으로 반환
@@ -45,4 +45,6 @@ public interface MovieListService {
     }
 
 
+    //장르 변환기
+    String changeGenres(String genres);
 }

@@ -22,28 +22,6 @@
     </head>
 
     <body>
-    <i class="bi-heart" style="font-size:10rem; color: red; cursor: pointer;"></i>
-    <p style="color: red;">하트 아이콘을 클릭 해보세요<p>
-
-        <script>
-
-            var i = 0;
-            $('i').on('click',function(){
-                if(i==0){
-                    $(this).attr('class','bi-heart-fill');
-                    i++;
-                }else if(i==1){
-                    $(this).attr('class','bi-heart');
-                    i--;
-                }
-
-            });
-
-        </script>
-    </body>
-
-
-    <body>
     <th:block th:fragment="content">
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -103,6 +81,9 @@
                             <span><p class="lead" th:text="${dto.movieNameK}"></p></span>
                         </div>
                         <p class="lead" th:text="${dto.movieInfo}"></p>
+                        <div class="fs-5 mb-5">
+                            <span><p class="lead" th:text="${dto.genres}"></p></span>
+                        </div>
                         <div class="d-flex">
                             <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" readonly/>
                             <button class="btn btn-outline-dark flex-shrink-0" type="button">
@@ -215,12 +196,12 @@
             </div>
         </section>
 
-
-        <button type="button" class="btn btn-primary"
-                th:onclick="|location.href='/review/' + ${dto.id}|">
-        [리뷰 개수] <span class="badge badge-light">리뷰 보기(View Reviews)</span>
-        </button>
-
+        <!--
+              <button type="button" class="btn btn-primary"
+                      th:onclick="|location.href='/review/' + ${dto.id}|">
+              [리뷰 개수] <span class="badge badge-light">리뷰 보기(View Reviews)</span>
+              </button>
+        -->
         <!-- Footer-->
         <footer class="py-5 bg-dark">
             <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2023</p></div>

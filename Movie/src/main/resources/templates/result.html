@@ -62,31 +62,104 @@
         </div>
     </header>
     <body>
-    <div>
-        <form th:action="@{/movie/list/result}" method="get">
-            <select name="type">
-                <option selected value="">검색 내용 선택</option>
-                <option value="title">제목</option>
-                <option value="genre">장르</option>
-                <option value="keyword">키워드</option>
-                <option value="releaseDate">개봉일</option>
-                <option value="rating">평점</option>
-            </select>
-            <select name="sort">
-                <option selected value="">정렬 기준 선택</option>
-                <option value="id">기본</option>
-                <option value="title">제목</option>
-                <option value="genre">장르</option>
-                <option value="releaseDate">개봉일</option>
-                <option value="rating">평점</option>
-            </select>
-            <select name="ad">
-                <option selected value="">정렬 방법 선택</option>
-                <option value="ac">낮은순</option>
-                <option value="dc">높은순</option>
-            <input type="text" name="keyword" class="tf-search" placeholder="🔍Search...">
-            <button type="submit">검색</button>
-        </form>
+    <div class="container">
+        <span>
+            &nbsp
+            <form th:action="@{/movie/list/result}" method="get">
+                <div class="justify-content-center">
+                    &nbsp
+                    &nbsp
+                    <input type="text" name="keyword" class="tf-search" placeholder="🔍Search..." style="width: 20%">
+                    <button type="submit">검색</button>
+                    <i th:text = "' 검색어' + ' : ' + ${keyword}"></i>
+                </div>
+                &nbsp
+                &nbsp
+
+                <div>
+                    &nbsp
+                    &nbsp
+                    <select name="type">
+                        <option value="" th:if="${type.equals('')}">검색 방식 선택</option>
+                        <option value="title" th:if="${type.equals('title')}">제목으로 검색</option>
+                        <option value="genre" th:if="${type.equals('genre')}">장르로 검색</option>
+                        <option value="keyword" th:if="${type.equals('keyword')}">키워드로 검색</option>
+                        <option value="releaseDate" th:if="${type.equals('releaseDate')}">개봉일로 검색</option>
+                        <option value="rating" th:if="${type.equals('rating')}">최소 평점 검색</option>
+                        <option value="title" th:unless="${type.equals('title')}">제목으로 검색</option>
+                        <option value="genre" th:unless="${type.equals('genre')}">장르로 검색</option>
+                        <option value="keyword" th:unless="${type.equals('keyword')}">키워드로 검색</option>
+                        <option value="releaseDate" th:unless="${type.equals('releaseDate')}">개봉일로 검색</option>
+                        <option value="rating" th:unless="${type.equals('rating')}">최소 평점 검색</option>
+                    </select>
+                    <select name="genreClass">
+                        <option value="" th:if="${genreClass.equals('')}">검색 장르 선택</option>
+                        <option value="액션" th:if="${genreClass.equals('액션')}">액션</option>
+                        <option value="모험" th:if="${genreClass.equals('모험')}">모험</option>
+                        <option value="애니메이션" th:if="${genreClass.equals('애니메이션')}">애니메이션</option>
+                        <option value="코미디" th:if="${genreClass.equals('코미디')}">코미디</option>
+                        <option value="범죄" th:if="${genreClass.equals('범죄')}">범죄</option>
+                        <option value="다큐멘터리" th:if="${genreClass.equals('다큐멘터리')}">다큐멘터리</option>
+                        <option value="드라마" th:if="${genreClass.equals('드라마')}">드라마</option>
+                        <option value="가족" th:if="${genreClass.equals('가족')}">가족</option>
+                        <option value="판타지" th:if="${genreClass.equals('판타지')}">판타지</option>
+                        <option value="공포" th:if="${genreClass.equals('공포')}">공포</option>
+                        <option value="음악" th:if="${genreClass.equals('음악')}">음악</option>
+                        <option value="미스테리" th:if="${genreClass.equals('미스테리')}">미스테리</option>
+                        <option value="판타지" th:if="${genreClass.equals('판타지')}">판타지</option>
+                        <option value="가족" th:if="${genreClass.equals('가족')}">가족</option>
+                        <option value="판타지" th:if="${genreClass.equals('판타지')}">판타지</option>
+                        <option value="로맨스" th:if="${genreClass.equals('로맨스')}">로맨스</option>
+                        <option value="SF" th:if="${genreClass.equals('SF')}">SF</option>
+                        <option value="TV 영화" th:if="${genreClass.equals('TV 영화')}">TV 영화</option>
+                        <option value="스릴러" th:if="${genreClass.equals('스릴러')}">스릴러</option>
+                        <option value="전쟁" th:if="${genreClass.equals('전쟁')}">전쟁</option>
+                        <option value="서부" th:if="${genreClass.equals('서부')}">서부</option>
+                        <option value="액션" th:if="${genreClass != '액션' }">액션</option>
+                        <option value="모험" th:if="${genreClass != '모험' }">모험</option>
+                        <option value="애니메이션" th:if="${genreClass != '애니메이션' }">애니메이션</option>
+                        <option value="코미디" th:if="${genreClass != '코미디' }">코미디</option>
+                        <option value="범죄"th:if="${genreClass != '범죄' }">범죄</option>
+                        <option value="다큐멘터리" th:if="${genreClass != '다큐멘터리' }">다큐멘터리</option>
+                        <option value="드라마" th:if="${genreClass != '드라마' }">드라마</option>
+                        <option value="가족" th:if="${genreClass != '가족' }">가족</option>
+                        <option value="판타지" th:if="${genreClass != '판타지' }">판타지</option>
+                        <option value="역사" th:if="${genreClass != '역사' }">역사</option>
+                        <option value="공포" th:if="${genreClass != '공포' }">공포</option>
+                        <option value="음악" th:if="${genreClass != '음악' }">음악</option>
+                        <option value="미스테리" th:if="${genreClass != '미스테리' }">미스테리</option>
+                        <option value="판타지" th:if="${genreClass != '판타지' }">판타지</option>
+                        <option value="로맨스" th:if="${genreClass != '로맨스' }">로맨스</option>
+                        <option value="SF" th:if="${genreClass != 'SF' }">SF</option>
+                        <option value="TV 영화" th:if="${genreClass != 'TV 영화' }">TV 영화</option>
+                        <option value="스릴러" th:if="${genreClass != '스릴러' }">스릴러</option>
+                        <option value="전쟁" th:if="${genreClass != '전쟁' }">전쟁</option>
+                        <option value="서부" th:if="${genreClass != '서부' }">서부</option>
+
+                    </select>
+                    <select name="sort">
+                        <option value="" th:if="${sort.equals('')}">정렬 기준 선택</option>
+                        <option value="id" th:if="${sort.equals('id')}">기본</option>
+                        <option value="title" th:if="${sort.equals('title')}">제목</option>
+                        <option value="genre" th:if="${sort.equals('genre')}">장르</option>
+                        <option value="releaseDate" th:if="${sort.equals('releaseDate')}">개봉일</option>
+                        <option value="rating" th:if="${sort.equals('rating')}">평점</option>
+                        <option value="id" th:unless="${sort.equals('id')}">기본</option>
+                        <option value="title" th:unless="${sort.equals('title')}">제목</option>
+                        <option value="genre" th:unless="${sort.equals('genre')}">장르</option>
+                        <option value="releaseDate" th:unless="${sort.equals('releaseDate')}">개봉일</option>
+                        <option value="rating" th:unless="${sort.equals('rating')}">평점</option>
+                    </select>
+                    <select name="ad">
+                        <option value="" th:if="${ad.equals('')}">정렬 기준 선택</option>
+                        <option value="ac" th:if="${ad.equals('ac')}">낮은순</option>
+                        <option value="dc" th:if="${ad.equals('dc')}">높은순</option>
+                        <option value="ac" th:unless="${ad.equals('ac')}">낮은순</option>
+                        <option value="dc" th:unless="${ad.equals('dc')}">높은순</option>
+                    </select>
+                </div>
+            </form>
+        </span>
     </div>
     </body>
         <form action="/movie/list" method="get" id="searchForm">
@@ -95,7 +168,6 @@
         <section class="py-5">
             <div class="container px-4 px-lg-5 mt-5">
                 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-                    <tbody>
                     <tr th:each="dto : ${result.dtoList}" >
                         <div class="col mb-5">
                             <div class="col mb-5">
@@ -111,43 +183,40 @@
                                                 <h5 class="fw-bolder">[[${dto.movieName}]]</h5>
                                             </a>
                                             <h5 class="fw-bolder">[[${dto.movieNameK}]]</h5>
+                                            <p class="lead" th:text="${dto.genres}"></p>
                                             <!-- Product reviews-->
-                                            [[${dto.rating}]]
-                                            <div class="d-flex justify-content-center small text-warning mb-2">
-                                                <div class="bi-star-fill"></div>
-                                                <div class="bi-star-fill"></div>
-                                                <div class="bi-star-fill"></div>
-                                                <div class="bi-star-fill"></div>
-                                                <div class="bi-star-fill"></div>
-                                            </div>
+                                            <i class="bi bi-star-fill"></i>
+                                            TMDB
+                                            <i th:text="${dto.rating}"></i>
                                         </div>
                                     </div>
                                     <!-- Product actions-->
                                     <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">선호작 추가</a></div>
+                                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#"><i class="bi bi-heart"></i> 선호작 추가</a></div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </tr>
-                    </tbody>
-                    <ul class="pagination">
-
-                        <li class="page-item " th:if="${result.prev}">
-                            <a class="page-link" th:href="@{/movie/list/result(type=${type},sort=${sort},ad=${ad},keyword=${keyword},page= ${result.start -1})}" tabindex="-1">Previous</a>
-                        </li>
-
-                        <li th:class=" 'page-item ' + ${result.page == page?'active':''} " th:each="page: ${result.pageList}">
-                            <a class="page-link" th:href="@{/movie/list/result(type=${type},sort=${sort},ad=${ad},keyword = ${keyword},page = ${page})}">
-                                [[${page}]]
-                            </a>
-                        </li>
-
-                        <li class="page-item" th:if="${result.next}">
-                            <a class="page-link" th:href="@{/movie/list/result(type=${type},sort=${sort},ad=${ad},keyword=${keyword},page= ${result.end + 1} )}">Next</a>
-                        </li>
-                    </ul>
                 </div>
+            </div>
+            <div>
+                <ul class="pagination justify-content-center align-items-center">
+
+                    <li class="page-item " th:if="${result.prev}">
+                        <a class="page-link" th:href="@{/movie/list/result(type=${type},genreClass=${genreClass},sort=${sort},ad=${ad},keyword=${keyword},page= ${result.start -1})}" tabindex="-1">Previous</a>
+                    </li>
+
+                    <li th:class=" 'page-item ' + ${result.page == page?'active':''} " th:each="page: ${result.pageList}">
+                        <a class="page-link" th:href="@{/movie/list/result(type=${type},genreClass=${genreClass},sort=${sort},ad=${ad},keyword = ${keyword},page = ${page})}">
+                            [[${page}]]
+                        </a>
+                    </li>
+
+                    <li class="page-item" th:if="${result.next}">
+                        <a class="page-link" th:href="@{/movie/list/result(type=${type},genreClass=${genreClass},sort=${sort},ad=${ad},keyword=${keyword},page= ${result.end + 1} )}">Next</a>
+                    </li>
+                </ul>
             </div>
             <script th:inline="javascript">
 
@@ -162,4 +231,4 @@
             <script src="js/scripts.js"></script>
         </section>
     </body>
- </html>
+</html>
