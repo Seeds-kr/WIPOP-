@@ -26,19 +26,18 @@ public class MovieListController {
         return "List";
     }
 
-    @GetMapping("index")
-    public String index(PageRequestDTO pageRequestDTO, Model model){
-        log.info("pageRequestDTO: "+ pageRequestDTO);
-        model.addAttribute("result", movieListService.getList(pageRequestDTO));
-        return "index";
+    @GetMapping("test")
+    public String test(){
+        return "test";
     }
 
     @GetMapping("list/result")
-    public String result(PageRequestDTO pageRequestDTO,String keyword,String type,String sort,String ad, Model model){
+    public String result(PageRequestDTO pageRequestDTO,String keyword, String type, String genreClass, String sort, String ad, Model model){
         log.info("pageRequestDTO: "+ pageRequestDTO);
-        model.addAttribute("result", movieListService.getResult(pageRequestDTO,type,sort,ad,keyword));
+        model.addAttribute("result", movieListService.getResult(pageRequestDTO,type,genreClass,sort,ad,keyword));
         model.addAttribute("keyword", keyword);
         model.addAttribute("type",type);
+        model.addAttribute("genreClass", genreClass);
         model.addAttribute("sort",sort);
         model.addAttribute("ad",ad);
         return "result";

@@ -1,6 +1,7 @@
 package com.example.movie.Controller;
 
 import com.example.movie.Entity.MovieInfoEntity;
+import com.example.movie.Service.MovieListService;
 import com.example.movie.dto.MovieInfoDTO;
 import com.example.movie.repository.MovieInfoRepo;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -18,6 +19,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -30,6 +32,7 @@ import java.util.Map;
 public class MovieInfoController {
 
     private final MovieInfoRepo movieInfoRepo;
+    private final MovieListService movieListService;
 
     //movieName으로 영화 상세 정보를 받아옵니다.
     @GetMapping("/movieinfo")
@@ -79,7 +82,8 @@ public class MovieInfoController {
                 movieInfoDTO.setReleaseDate(mnList.getOrDefault("영화 출시일" + i, "null").toString());
                 movieInfoDTO.setRating(Double.parseDouble(mnList.getOrDefault("영화 평점" + i, "null").toString()));
                 movieInfoDTO.setMovieInfo(mnList.getOrDefault("영화 소개" + i, "null").toString());
-                movieInfoDTO.setGenres(mnList.getOrDefault("영화 장르" + i, "null").toString());
+                String genres = mnList.getOrDefault("영화 장르" + i, "null").toString();
+                movieInfoDTO.setGenres(movieListService.changeGenres(genres));
                 //TMDB에서 포스터 경로가 없으면 null로 저장해서 예외 처리
                 if(mnList.get("영화 포스터" + i) == null){
                     movieInfoDTO.setPosterURL("");
@@ -154,7 +158,8 @@ public class MovieInfoController {
                     movieInfoDTO.setReleaseDate(mnList.getOrDefault("영화 출시일" + i, "null").toString());
                     movieInfoDTO.setRating(Double.parseDouble(mnList.getOrDefault("영화 평점" + i, "null").toString()));
                     movieInfoDTO.setMovieInfo(mnList.getOrDefault("영화 소개" + i, "null").toString());
-                    movieInfoDTO.setGenres(mnList.getOrDefault("영화 장르" + i, "null").toString());
+                    String genres = mnList.getOrDefault("영화 장르" + i, "null").toString();
+                    movieInfoDTO.setGenres(movieListService.changeGenres(genres));
                     //TMDB에서 포스터 경로가 없으면 null로 저장해서 예외 처리
                     if (mnList.get("영화 포스터" + i) == null) {
                         movieInfoDTO.setPosterURL("");
