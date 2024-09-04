@@ -85,7 +85,11 @@
                             <span><p class="lead" th:text="${dto.genres}"></p></span>
                         </div>
                         <div class="d-flex">
-                            <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" readonly/>
+                            <button class="btn btn-outline-dark flex-shrink-0" th:onclick="|location.href='@{/review/}'+${dto.id}|" type="button">
+                                리뷰
+                            </button>
+                            &nbsp
+                            &nbsp
                             <button class="btn btn-outline-dark flex-shrink-0" type="button">
                                 <script>
                                     var i = 0;

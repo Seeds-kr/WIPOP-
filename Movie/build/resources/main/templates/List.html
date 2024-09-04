@@ -126,6 +126,7 @@
             </span>
         </div>
     </body>
+
         <form action="/movie/list" method="get" id="searchForm">
             <input type="hidden" name="page" value="1">
         </form>
@@ -137,10 +138,13 @@
                     <div class="col mb-5">
                         <div class="col mb-5">
                             <div class="card h-100">
+                            <div class="movie-card" th:onclick="|location.href='@{/movie/read(id = ${dto.id}, page= ${result.page})}'|">
+                                <div class="card-body p-4">
                                 <!-- Product image-->
                                 <td><img th:if="${dto.getPosterURL() != null }"
                                          th:src="|https://image.tmdb.org/t/p/w300${dto.getPosterURL()}|"></td>
                                 <!-- Product details-->
+                                </div>
                                 <div class="card-body p-4">
                                     <div class="text-center">
                                         <!-- Product name-->
@@ -160,6 +164,7 @@
                                     <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#"><i class="bi bi-heart"></i> 선호작 추가</a></div>
                                 </div>
                             </div>
+                            </div>
                         </div>
                     </div>
                     </tr>
@@ -167,6 +172,7 @@
                     &nbsp
                 </div>
             </div>
+
             <div>
                 <ul class="pagination justify-content-center align-items-center">
 
