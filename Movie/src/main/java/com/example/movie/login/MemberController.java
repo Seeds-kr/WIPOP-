@@ -33,4 +33,16 @@ public class MemberController {
         memberService.save(member);
         return "redirect:/";
     }
+    @GetMapping("/myPage")
+    public String myPage(Model model, HttpSession session){
+
+        Member findMember = (Member) session.getAttribute(SessionConst.LOGIN_MEMBER);
+        if(findMember == null){
+            return "redirect:/login";
+        }
+
+        Member member = memberService.findMemberById(findMember.getId());
+        model.addAttribute("member", member);
+        return "myPage";
+    }
 }
