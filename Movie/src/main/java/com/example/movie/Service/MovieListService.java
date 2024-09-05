@@ -14,6 +14,8 @@ public interface MovieListService {
     PageResultDTO<MovieInfoDTO, Object[]> getList(PageRequestDTO pageRequestDTO);
     PageResultDTO<MovieInfoDTO, Object[]> getResult(PageRequestDTO requestDTO, String type,String genreClass,String sort,String ad,String keyword);
 
+    PageResultDTO<MovieInfoDTO, Object[]> getGenreMovieList(PageRequestDTO requestDTO,String Genre);
+
     default Map<String, Object> dtoToEntity(MovieInfoDTO movieInfoDTO){
         //Map타입으로 반환
         Map<String, Object> entityMap= new HashMap<>();

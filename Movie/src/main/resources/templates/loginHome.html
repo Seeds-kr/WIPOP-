@@ -90,6 +90,10 @@
                         선호작
                         <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
                     </button>
+                    &nbsp
+                    &nbsp
+                    &nbsp
+                    <h4 class="lead fw-normal text-black-50 mb-0" th:text="|환영합니다 ${member.userName}님|">로그인 사용자 이름</h4>
                 </form>
             </div>
         </div>
@@ -104,12 +108,13 @@
         </div>
     </header>
 
-    <hr class="container" style="max-width: 1200px">
-
-        <h4 class="mb-3" th:text="|로그인: ${member.userName}|">로그인 사용자 이름</h4>
+    <hr class="container">
         <hr class="my-4">
 
+    <div class="container" style="max-width: 600px">
         <div class="row">
+            &nbsp
+            &nbsp
             <div class="col">
                 <form th:action="@{/logout}" method="post">
                     <button class="w-100 btn btn-dark btn-lg" type="submit">
@@ -123,14 +128,18 @@
                     영화 검색
                 </button>
             </div>
+            <!--
             <div class="col">
                 <button class="w-100 btn btn-secondary btn-lg" type="button"
                         th:onclick="|location.href='@{/getmovielist}'|">
                     영화 목록 없으면 클릭
                 </button>
             </div>
+            -->
+            &nbsp
+            &nbsp
         </div>
-
+    </div>
 
         <form action="" method="get" id="searchForm">
             <input type="hidden" name="page" value="1">
@@ -138,7 +147,7 @@
         <section class="py-5">
             <div class="container px-4 px-lg-5 mt-5">
                 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-                    <tr th:each="dto : ${recommendedMovies}" >
+                    <tr th:each="dto : ${recommendedMovies}" th:if="${dtoStat.count} < 21">
                         <div class="col mb-5">
                             <div class="col mb-5">
                                 <div class="card h-100">
@@ -149,7 +158,7 @@
                                     <div class="card-body p-4">
                                         <div class="text-center">
                                             <!-- Product name-->
-                                            <a th:href="@{/movie/read(id = ${dto.id})}">
+                                            <a th:href="@{/movie/read(id = ${dto.id}, genre= ${dto.genres})}">
                                                 <h5 class="fw-bolder">[[${dto.movieName}]]</h5>
                                             </a>
                                             <h5 class="fw-bolder">[[${dto.movieNameK}]]</h5>

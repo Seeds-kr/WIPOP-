@@ -21,6 +21,10 @@ public interface MovieInfoRepo extends JpaRepository<MovieInfoEntity, Long>
     List<Object[]> getMovieWithAll(Long id);
 
     @Query("select  m.id ,m.movieId, m.movieName, m.movieNameK, m.genres, m.movieInfo, m.posterURL, m.releaseDate, m.rating " +
+            "from MovieInfoEntity as m where m.genres LIKE %:genre% order by RAND()")
+    Page<Object[]> getListWithGenre(Pageable pageable,String genre);
+
+    @Query("select  m.id ,m.movieId, m.movieName, m.movieNameK, m.genres, m.movieInfo, m.posterURL, m.releaseDate, m.rating " +
             "from MovieInfoEntity as m where m.genres LIKE %:genre% and m.genres Like %:genreClass%")
     Page<Object[]> getMovieWithGenre(Pageable pageable,String genre,String genreClass);
 

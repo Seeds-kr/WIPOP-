@@ -151,6 +151,25 @@ public class MovieListServiceImpl implements MovieListService{
         return entitiesToDTO(id,movieId,movieName, movieNameK, genres, movieInfo,  url, releaseDate, rating);
     }
 
+    public PageResultDTO<MovieInfoDTO, Object[]> getGenreMovieList(PageRequestDTO requestDTO,String Genre){
+        Pageable pageable= requestDTO.getPageable(Sort.by("id").ascending());
+        Page<Object[]> result = movieInfoRepository.getListWithGenre(pageable,Genre);
+
+        Function<Object[],MovieInfoDTO> fn = ( arr->entitiesToDTO(
+                (Long) arr[0],
+                (Long) arr[1],
+                (String) arr[2],
+                (String) arr[3],
+                (String) arr[4],
+                (String) arr[5],
+                (String) arr[6],
+                (String) arr[7],
+                (double) arr[8]
+        )
+        );
+        return new PageResultDTO<>(result,fn);
+    }
+
     //장르 변환기
     @Override
     public String changeGenres(String genres) {

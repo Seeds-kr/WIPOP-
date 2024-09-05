@@ -180,7 +180,7 @@
                                     <div class="card-body p-4">
                                         <div class="text-center">
                                             <!-- Product name-->
-                                            <a th:href="@{/movie/read(id = ${dto.id}, page= ${result.page})}">
+                                            <a th:href="@{/movie/read(id = ${dto.id}, page= ${result.page}, genre= ${dto.genres})}">
                                                 <h5 class="fw-bolder">[[${dto.movieName}]]</h5>
                                             </a>
                                             <h5 class="fw-bolder">[[${dto.movieNameK}]]</h5>

@@ -117,7 +117,7 @@ public class MovieInfoController {
 
         HashMap<String, Object> result = new HashMap<String, Object>();
         String jsonInString = "";
-        int pageMax = 50;//받아오는 마지막 페이지
+        int pageMax = 500;//받아오는 마지막 페이지
         int pageNum = 1;//받아오는 시작 페이지
         for (pageNum = 1; pageNum <= pageMax; pageNum++){
             try {
