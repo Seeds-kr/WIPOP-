@@ -135,7 +135,7 @@
                                 <div class="card-body p-4">
                                     <div class="text-center">
                                         <!-- Product name-->
-                                        <a th:href="@{/movie/read(id = ${rdto.id}, genre= ${rdto.genres})}">
+                                        <a th:href="@{/movie/read(id = ${rdto.id}, page= ${result.page}, genre= ${rdto.genres})}">
                                             <h5 class="fw-bolder">[[${rdto.movieName}]]</h5>
                                         </a>
                                         <h5 class="fw-bolder">[[${rdto.movieNameK}]]</h5>

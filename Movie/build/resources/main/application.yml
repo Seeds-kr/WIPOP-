@@ -17,6 +17,7 @@ spring:
     open-in-view: false
     show-sql: true
     hibernate:
+      # DB 새로 만들 거면 create 로 할 것
       ddl-auto:
     properties:
       hibernate:
