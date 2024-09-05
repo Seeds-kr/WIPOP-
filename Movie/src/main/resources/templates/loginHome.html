@@ -182,32 +182,6 @@
         </section>
         -->
 
-        <!-- 추천 영화 목록 표시 -->
-    <!--
-        <hr class="my-4">
-            <div>
-                <h4>추천 영화 목록</h4>
-                <div class="row">
-                    <div class="col-md-4" th:each="movie : ${recommendedMovies}">
-                        <div class="movie-card" th:onclick="|location.href='@{/movie/read(id=${movie.id})}'|">
-                            <div class="movie-card-content">
-                                <img th:if="${movie.posterURL != null}"
-                                     th:src="|https://image.tmdb.org/t/p/w300${movie.posterURL}|"
-                                     alt="Poster">
-                                <div class="movie-card-body">
-                                    <h5 th:text="${movie.movieName}">Movie Name</h5>
-                                    <p class="rating">
-                                        <span th:text="'Rating: ' + ${movie.rating}">Rating</span>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        -->
-
     <!-- Footer-->
     <footer class="py-5 bg-dark">
         <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2023</p></div>
