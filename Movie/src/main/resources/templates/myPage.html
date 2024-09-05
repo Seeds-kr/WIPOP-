@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>My Page</title>
+    <!-- 부트스트랩 CSS 파일 -->
+    <link th:href="@{/css/css/bootstrap.min.css}" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Profile</h5>
+                    <p class="card-text">
+                        <strong>ID:</strong> <span th:text="${member.id}"></span><br>
+                        <strong>User Name:</strong> <span th:text="${member.userName}"></span><br>
+<!--                        <strong>Email:</strong> <span th:text="${member.email}"></span><br>-->
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <h2>My Reviews</h2>
+            <div class="list-group">
+                <a href="#" class="list-group-item list-group-item-action" th:each="review : ${member.reviews}">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1" th:text="${review.getMovie().getMovieName()}">Movie Title</h5>
+                    </div>
+                    <p class="mb-1" th:text="${review.getBody()}">Review Content</p>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 부트스트랩 JS 파일들 -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+
