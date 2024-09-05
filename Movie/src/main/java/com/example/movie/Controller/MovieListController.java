@@ -48,7 +48,6 @@ public class MovieListController {
     @GetMapping({"/read", "/modify"})
     public String read(long id, String genre,@ModelAttribute("requestDTO") PageRequestDTO requestDTO, Model model) {
         log.info("id : " + id);
-
         MovieInfoDTO movieInfoDTO = movieListService.getMovie(id);
         model.addAttribute("result",movieListService.getGenreMovieList(requestDTO,genre));
         model.addAttribute("dto", movieInfoDTO);
