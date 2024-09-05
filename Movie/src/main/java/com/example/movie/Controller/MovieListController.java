@@ -3,6 +3,7 @@ package com.example.movie.Controller;
 import com.example.movie.Service.MovieListService;
 import com.example.movie.dto.MovieInfoDTO;
 import com.example.movie.dto.PageRequestDTO;
+import com.example.movie.repository.MovieInfoRepo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 //영화 목록 리스트 페이지로 전달
 public class MovieListController {
     private final MovieListService movieListService;
+    private final MovieInfoRepo movieInfoRepo;
     @GetMapping("list")
     public String list(PageRequestDTO pageRequestDTO, Model model){
         log.info("pageRequestDTO: "+ pageRequestDTO);
@@ -44,11 +46,11 @@ public class MovieListController {
     }
 
     @GetMapping({"/read", "/modify"})
-    public String read(long id, @ModelAttribute("requestDTO") PageRequestDTO requestDTO, Model model) {
+    public String read(long id, String genre,@ModelAttribute("requestDTO") PageRequestDTO requestDTO, Model model) {
         log.info("id : " + id);
 
         MovieInfoDTO movieInfoDTO = movieListService.getMovie(id);
-
+        model.addAttribute("result",movieListService.getGenreMovieList(requestDTO,genre));
         model.addAttribute("dto", movieInfoDTO);
         return "read";
     }
