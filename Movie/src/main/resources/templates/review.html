@@ -78,7 +78,7 @@
                     <h5 class="card-title" th:text="${review.title}">Review Title</h5>
                     <p class="card-text" th:text="${review.body}">Review Body</p>
                     <p class="card-text"><strong>Score:</strong> <span th:text="${review.score}">Score</span></p>
-                    <p class="card-text"><strong>By:</strong> <span th:text="${review.member.id} + ' : ' + ${review.member.userName}">Reviewer Name</span></p>
+                    <p class="card-text"><strong>By:</strong> <span th:text="${review.member.userName}">Reviewer Name</span></p>
                 </div>
             </div>
 
