@@ -23,4 +23,9 @@ public class MemberService {
         Optional<Member> member = memberRepository.findById(id);
         return member.orElse(null);
     }
+
+    public Member findMemberByLoginId(String loginId){
+        Optional<Member> member = memberRepository.findMemberByMemberId(loginId);
+        return member.orElse(null);
+    }
 }
