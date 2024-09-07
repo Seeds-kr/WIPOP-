@@ -5,6 +5,7 @@ import com.example.movie.Service.MemberService;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
+@Slf4j
 @RequiredArgsConstructor
 @RequestMapping("/members")
 public class MemberController {
@@ -29,6 +31,10 @@ public class MemberController {
     public String save(@Valid @ModelAttribute Member member,
                        BindingResult bindingResult){
         if(bindingResult.hasErrors()){
+            return "members/addMemberForm";
+        }
+        if(memberService.findMemberByLoginId(member.getMemberId()) != null){
+            bindingResult.rejectValue("memberId", "error.member", "이미 사용 중인 아이디입니다.");
             return "members/addMemberForm";
         }
 
