@@ -15,11 +15,11 @@ public class Member extends BaseTime {
     @Id @GeneratedValue
     private Long id;
 
-    @NotEmpty
+    @NotEmpty(message = "아이디는 필수 입력 항목입니다.")
     private String memberId;
-    @NotEmpty
+    @NotEmpty(message = "비밀번호는 필수 입력 항목입니다.")
     private String password;
-    @NotEmpty
+    @NotEmpty(message = "사용자명은 필수 입력 항목입니다.")
     private String userName;
     private String userMovieTag;
 
