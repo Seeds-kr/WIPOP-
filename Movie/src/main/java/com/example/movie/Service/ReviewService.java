@@ -8,11 +8,14 @@ import com.example.movie.repository.MemberRepository;
 import com.example.movie.repository.MovieInfoRepo;
 import com.example.movie.repository.ReviewRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Objects;
 
+@Slf4j
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -45,5 +48,10 @@ public class ReviewService {
         return reviewRepository.findAllByMovie(findMovie);
     }
 
+    public void deleteReview(Long reviewId){
+        log.info("delete service");
+        reviewRepository.deleteById(reviewId);
+
+    }
 
 }

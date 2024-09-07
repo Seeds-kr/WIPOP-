@@ -15,6 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -40,6 +41,7 @@ public class ReviewController {
         model.addAttribute("reviews", reviews);
         model.addAttribute("movie", movie);
         model.addAttribute("movieId", movieId);
+        model.addAttribute("member", member);
 
         return "review";// 템플릿
     }
@@ -62,6 +64,15 @@ public class ReviewController {
         reviewDto.setMemberId(member.getId());
         reviewService.addReview(reviewDto);
 
+        return "redirect:/review/" + movieId;
+    }
+
+    @PostMapping("/{movieId}/{reviewId}")
+    public String deleteReview(@PathVariable Long movieId, @PathVariable Long reviewId,
+                               HttpServletRequest request, RedirectAttributes redirectAttributes){
+        HttpSession session = request.getSession();
+        Member member = (Member) session.getAttribute(SessionConst.LOGIN_MEMBER);
+        reviewService.deleteReview(reviewId);
         return "redirect:/review/" + movieId;
     }
 }
