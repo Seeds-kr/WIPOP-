@@ -78,7 +78,11 @@
                     <h5 class="card-title" th:text="${review.title}">Review Title</h5>
                     <p class="card-text" th:text="${review.body}">Review Body</p>
                     <p class="card-text"><strong>Score:</strong> <span th:text="${review.score}">Score</span></p>
-                    <p class="card-text"><strong>By:</strong> <span th:text="${review.member.id} + ' : ' + ${review.member.userName}">Reviewer Name</span></p>
+                    <p class="card-text"><strong>By:</strong> <span th:text="${review.member.userName}">Reviewer Name</span></p>
+                    <form th:if="${member != null and member.getId() == review.member.getId()}"
+                            th:action="@{/review/{movieId}/{id}(movieId = ${movie.getId()}, id=${review.getId()})}" method="post">
+                        <button class="w-100 btn btn-secondary btn-lg" type="submit">X</button>
+                    </form>
                 </div>
             </div>
 
@@ -108,6 +112,8 @@
 <footer class="py-5 bg-dark">
     <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2023</p></div>
 </footer>
+
+
 <!-- Bootstrap core JS-->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Core theme JS-->
