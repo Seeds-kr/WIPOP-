@@ -20,7 +20,7 @@
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container px-4 px-lg-5">
-            <a class="navbar-brand" href="#!">무비팝</a>
+            <a class="navbar-brand" href="/" role="button">MoviePop</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
@@ -43,7 +43,7 @@
                     </li>
                 </ul>
                 <form class="d-flex">
-                    <button class="btn btn-outline-dark" type="submit">
+                    <button class="btn btn-outline-dark" type="button" onclick="window.location.href='/viewlist'">
                         <i class="bi-cart-fill me-1"></i>
                         선호작
                         <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
@@ -53,14 +53,16 @@
         </div>
     </nav>
     <!-- Header-->
-    <header class="bg-dark py-5">
-        <div class="container px-4 px-lg-5 my-5">
-            <div class="text-center text-white">
-                <h1 class="display-4 fw-bolder">MOVIE POP</h1>
-                <p class="lead fw-normal text-white-50 mb-0">영화를 검색하세요</p>
+    <a th:href="@{/}" style="text-decoration: none;">
+        <div class="bg-dark py-5">
+            <div class="container px-4 px-lg-5 my-5">
+                <div class="text-center text-white">
+                    <h1 class="display-4 fw-bolder">MOVIE POP</h1>
+                    <p class="lead fw-normal text-white-50 mb-0">영화를 검색하세요</p>
+                </div>
             </div>
         </div>
-    </header>
+    </a>
     <body>
     <div class="container">
         <span>
@@ -199,7 +201,11 @@
                                     </div>
                                     <!-- Product actions-->
                                     <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#"><i class="bi bi-heart"></i> 선호작 추가</a></div>
+                                        <div class="text-center">
+                                            <button class="btn btn-outline-dark mt-auto" th:onclick="|addToViewList(${dto.id})|">
+                                                <i class="bi bi-heart"></i> 선호작 추가
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -227,6 +233,33 @@
                 </ul>
             </div>
             <script th:inline="javascript">
+
+            </script>
+
+            <script>
+                function addToViewList(movieId) {
+            console.log("Adding movie with ID:", movieId); // 추가된 코드
+            fetch(`/addlist`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ movieId: movieId })  // 데이터를 JSON 형태로 전송
+            })
+            .then(response => {
+                if (response.ok) {
+                    return response.text();
+                } else {
+                    throw new Error('Network response was not ok');
+                }
+            })
+            .then(data => {
+                alert(data);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
 
             </script>
             <!-- Footer-->
