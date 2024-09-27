@@ -28,7 +28,7 @@ public class ViewListEntity {
     @JoinColumn(name = "member_id", referencedColumnName = "id")
     private Member member;  // 사용자와 다대일 관계
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "viewlist_movies",  // 중간 테이블 이름
             joinColumns = @JoinColumn(name = "viewlist_id"),

@@ -3,14 +3,21 @@ package com.example.movie.Controller;
 import com.example.movie.Entity.Member;
 import com.example.movie.Entity.MovieInfoEntity;
 import com.example.movie.Service.MovieRecommendationService;
+import com.example.movie.Service.ViewListService;
 import com.example.movie.login.SessionConst;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor
@@ -38,5 +45,7 @@ public class MainController {
         // 메인 페이지를 반환합니다.
         return "mainPage";
     }
-}
 
+
+
+}
