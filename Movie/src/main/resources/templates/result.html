@@ -195,13 +195,14 @@
                                         TMDB
                                         <i th:text="${dto.rating}"></i>
                                     </div>
-                                </div>
-                                <!-- Product actions-->
-                                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                    <div class="text-center">
-                                        <button class="btn btn-outline-dark mt-auto" th:onclick="|addToViewList(${dto.id})|">
-                                            <i class="bi bi-heart"></i> 선호작 추가
-                                        </button>
+                                    <!-- Product actions-->
+                                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                        <div class="text-center">
+                                            <button class="btn btn-outline-dark mt-auto" th:onclick="|addToViewList(${dto.id})|">
+                                                <i class="bi bi-heart"></i> 선호작 추가
+                                            </button>
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -230,6 +231,7 @@
             </ul>
         </div>
         <script th:inline="javascript">
+
 
         </script>
 
