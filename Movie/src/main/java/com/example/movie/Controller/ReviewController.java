@@ -4,6 +4,7 @@ import com.example.movie.Entity.Member;
 import com.example.movie.Entity.MovieInfoEntity;
 import com.example.movie.Entity.Review;
 import com.example.movie.Service.MovieInfoService;
+import com.example.movie.Service.MovieRecommendationService;
 import com.example.movie.Service.ReviewService;
 import com.example.movie.dto.ReviewDto;
 import com.example.movie.login.SessionConst;
@@ -27,6 +28,7 @@ public class ReviewController {
 
     private final ReviewService reviewService;
     private final MovieInfoService movieInfoService;
+    private final MovieRecommendationService movieRecommendationService;
 
     @GetMapping("/{movieId}")
     public String getMovie(@PathVariable Long movieId, Model model, HttpServletRequest request){
@@ -59,6 +61,8 @@ public class ReviewController {
     public String addReview(@PathVariable Long movieId, @ModelAttribute ReviewDto reviewDto, HttpServletRequest request){
         HttpSession session = request.getSession();
         Member member = (Member) session.getAttribute(SessionConst.LOGIN_MEMBER);
+
+        List<MovieInfoEntity> recommendedMovies = movieRecommendationService.getRecommendedMovies(member);
 
         log.info("add" + member);
         reviewDto.setMemberId(member.getId());
