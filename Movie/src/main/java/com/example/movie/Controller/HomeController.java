@@ -91,4 +91,3 @@ public class HomeController {
         return "viewlist";  // viewlist.html을 반환 (Thymeleaf 템플릿 페이지)
     }
 }
-

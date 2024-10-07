@@ -41,7 +41,7 @@
                     </li>
                 </ul>
                 <form class="d-flex">
-                    <button class="btn btn-outline-dark" type="button" onclick="window.location.href='/viewlist'">
+                    <<button class="btn btn-outline-dark" type="button" onclick="window.location.href='/viewlist'">
                         <i class="bi-cart-fill me-1"></i>
                         선호작
                         <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
@@ -162,12 +162,10 @@
                                         </div>
                                     </div>
                                     <!-- Product actions-->
-                                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                        <div class="text-center">
-                                            <button class="btn btn-outline-dark mt-auto" th:onclick="|addToViewList(${dto.id})|">
-                                                <i class="bi bi-heart"></i> 선호작 추가
-                                            </button>
-                                        </div>
+                                    <div class="text-center">
+                                        <button class="btn btn-outline-dark mt-auto" th:onclick="|addToViewList(${dto.id})|">
+                                            <i class="bi bi-heart"></i> 선호작 추가
+                                        </button>
                                     </div>
                                 </div>
                             </div>

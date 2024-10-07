@@ -8,4 +8,3 @@ import java.util.Optional;
 public interface ViewListRepository extends JpaRepository<ViewListEntity, Long> {
     Optional<ViewListEntity> findByMemberId(Long memberId);
 }
-

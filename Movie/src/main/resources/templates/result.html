@@ -1,5 +1,4 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<th:block>
     <!DOCTYPE html>
     <head>
         <meta charset="utf-8">
@@ -63,7 +62,6 @@
             </div>
         </div>
     </a>
-    <body>
     <div class="container">
         <span>
             &nbsp
@@ -170,106 +168,105 @@
         </span>
     </div>
 
-    </body>
-        <form action="/movie/list" method="get" id="searchForm">
-            <input type="hidden" name="page" value="1">
-        </form>
-        <section class="py-5">
-            <div class="container px-4 px-lg-5 mt-5">
-                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-                    <tr th:each="dto : ${result.dtoList}" >
+    <form action="/movie/list" method="get" id="searchForm">
+        <input type="hidden" name="page" value="1">
+    </form>
+    <section class="py-5">
+        <div class="container px-4 px-lg-5 mt-5">
+            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                <tr th:each="dto : ${result.dtoList}" >
+                    <div class="col mb-5">
                         <div class="col mb-5">
-                            <div class="col mb-5">
-                                <div class="card h-100">
-                                    <!-- Product image-->
-                                    <td><img th:if="${dto.getPosterURL() != null }"
-                                             th:src="|https://image.tmdb.org/t/p/w300${dto.getPosterURL()}|" ></td>
-                                    <!-- Product details-->
-                                    <div class="card-body p-4">
-                                        <div class="text-center">
-                                            <!-- Product name-->
-                                            <a th:href="@{/movie/read(id = ${dto.id}, page= 1, genre= ${dto.genres})}">
-                                                <h5 class="fw-bolder">[[${dto.movieName}]]</h5>
-                                            </a>
-                                            <h5 class="fw-bolder">[[${dto.movieNameK}]]</h5>
-                                            <p class="lead" th:text="${dto.genres}"></p>
-                                            <!-- Product reviews-->
-                                            <i class="bi bi-star-fill"></i>
-                                            TMDB
-                                            <i th:text="${dto.rating}"></i>
-                                        </div>
+                            <div class="card h-100">
+                                <!-- Product image-->
+                                <td><img th:if="${dto.getPosterURL() != null }"
+                                         th:src="|https://image.tmdb.org/t/p/w300${dto.getPosterURL()}|" ></td>
+                                <!-- Product details-->
+                                <div class="card-body p-4">
+                                    <div class="text-center">
+                                        <!-- Product name-->
+                                        <a th:href="@{/movie/read(id = ${dto.id}, page= 1, genre= ${dto.genres})}">
+                                            <h5 class="fw-bolder">[[${dto.movieName}]]</h5>
+                                        </a>
+                                        <h5 class="fw-bolder">[[${dto.movieNameK}]]</h5>
+                                        <p class="lead" th:text="${dto.genres}"></p>
+                                        <!-- Product reviews-->
+                                        <i class="bi bi-star-fill"></i>
+                                        TMDB
+                                        <i th:text="${dto.rating}"></i>
                                     </div>
-                                    <!-- Product actions-->
-                                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                        <div class="text-center">
-                                            <button class="btn btn-outline-dark mt-auto" th:onclick="|addToViewList(${dto.id})|">
-                                                <i class="bi bi-heart"></i> 선호작 추가
-                                            </button>
-                                        </div>
+                                </div>
+                                <!-- Product actions-->
+                                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                    <div class="text-center">
+                                        <button class="btn btn-outline-dark mt-auto" th:onclick="|addToViewList(${dto.id})|">
+                                            <i class="bi bi-heart"></i> 선호작 추가
+                                        </button>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </tr>
-                </div>
+                    </div>
+                </tr>
             </div>
+        </div>
 
-            <div>
-                <ul class="pagination justify-content-center align-items-center">
+        <div>
+            <ul class="pagination justify-content-center align-items-center">
 
-                    <li class="page-item " th:if="${result.prev}">
-                        <a class="page-link" th:href="@{/movie/list/result(type=${type},genreClass=${genreClass},sort=${sort},ad=${ad},keyword=${keyword},page= ${result.start -1})}" tabindex="-1">Previous</a>
-                    </li>
+                <li class="page-item " th:if="${result.prev}">
+                    <a class="page-link" th:href="@{/movie/list/result(type=${type},genreClass=${genreClass},sort=${sort},ad=${ad},keyword=${keyword},page= ${result.start -1})}" tabindex="-1">Previous</a>
+                </li>
 
-                    <li th:class=" 'page-item ' + ${result.page == page?'active':''} " th:each="page: ${result.pageList}">
-                        <a class="page-link" th:href="@{/movie/list/result(type=${type},genreClass=${genreClass},sort=${sort},ad=${ad},keyword = ${keyword},page = ${page})}">
-                            [[${page}]]
-                        </a>
-                    </li>
+                <li th:class=" 'page-item ' + ${result.page == page?'active':''} " th:each="page: ${result.pageList}">
+                    <a class="page-link" th:href="@{/movie/list/result(type=${type},genreClass=${genreClass},sort=${sort},ad=${ad},keyword = ${keyword},page = ${page})}">
+                        [[${page}]]
+                    </a>
+                </li>
 
-                    <li class="page-item" th:if="${result.next}">
-                        <a class="page-link" th:href="@{/movie/list/result(type=${type},genreClass=${genreClass},sort=${sort},ad=${ad},keyword=${keyword},page= ${result.end + 1} )}">Next</a>
-                    </li>
-                </ul>
-            </div>
-            <script th:inline="javascript">
+                <li class="page-item" th:if="${result.next}">
+                    <a class="page-link" th:href="@{/movie/list/result(type=${type},genreClass=${genreClass},sort=${sort},ad=${ad},keyword=${keyword},page= ${result.end + 1} )}">Next</a>
+                </li>
+            </ul>
+        </div>
+        <script th:inline="javascript">
 
-            </script>
+        </script>
 
-            <script>
-                function addToViewList(movieId) {
-            console.log("Adding movie with ID:", movieId); // 추가된 코드
-            fetch(`/addlist`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ movieId: movieId })  // 데이터를 JSON 형태로 전송
-            })
-            .then(response => {
-                if (response.ok) {
-                    return response.text();
-                } else {
-                    throw new Error('Network response was not ok');
-                }
-            })
-            .then(data => {
-                alert(data);
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
-        }
+        <script>
+            function addToViewList(movieId) {
+        console.log("Adding movie with ID:", movieId); // 추가된 코드
+        fetch(`/addlist`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ movieId: movieId })  // 데이터를 JSON 형태로 전송
+        })
+        .then(response => {
+            if (response.ok) {
+                return response.text();
+            } else {
+                throw new Error('Network response was not ok');
+            }
+        })
+        .then(data => {
+            alert(data);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
 
-            </script>
-            <!-- Footer-->
-            <footer class="py-5 bg-dark">
-                <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2023</p></div>
-            </footer>
-            <!-- Bootstrap core JS-->
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-            <!-- Core theme JS-->
-            <script src="js/scripts.js"></script>
-        </section>
+        </script>
+        <!-- Footer-->
+        <footer class="py-5 bg-dark">
+            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2023</p></div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+    </section>
     </body>
 </html>
